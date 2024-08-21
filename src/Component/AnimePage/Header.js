@@ -62,10 +62,10 @@ const Header = () => {
                         <input
                             type='search'
                             id='title-search'
-                            className='block w-full py-2 pl-10 pr-4 text-sm border-4 border-gray-600 dark:bg-gray-600 rounded-lg bg-blue-200 focus:outline-none'
+                            className='block w-full py-2 pl-3 pr-4 text-sm border-2 border-gray-600 dark:bg-gray-600 rounded-lg bg-blue-200 focus:outline-none'
                             placeholder='Search by Title'
                         />
-                        <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+                        <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
                             <svg
                                 className='w-4 h-4 text-gray-500'
                                 aria-hidden='true'
@@ -83,11 +83,6 @@ const Header = () => {
                             </svg>
                         </div>
                     </div>
-                    <button
-                        className='px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700'
-                    >
-                        Search
-                    </button>
                 </div>
             </div>
         </nav>
