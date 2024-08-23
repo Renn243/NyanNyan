@@ -28,7 +28,7 @@ const Detail = () => {
             <div className='flex flex-row mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
                 <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className="text-lg lg:text-xl mb-2">
-                        <span className="inline-block bg-blue-300 font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Synopsis</span>
+                        <span className="inline-block bg-blue-300 font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Detail</span>
                     </h2>
                     <table className="w-full text-left dark:text-gray-400">
                         <tbody>
