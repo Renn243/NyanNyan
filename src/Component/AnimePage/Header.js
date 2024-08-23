@@ -74,7 +74,7 @@ const Header = () => {
                             checked={darkMode}
                             onChange={toggleDarkMode}
                         />
-                        <div className="w-11 h-6 bg-gray-300 rounded-full dark:bg-gray-600 duration-300"></div>
+                        <div className="w-11 h-6 bg-gray-300 dark:hover:bg-blue-500 rounded-full dark:bg-gray-600 duration-300"></div>
                         <span className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 dark:translate-x-5 translate-x-0`}></span>
                     </label>
 

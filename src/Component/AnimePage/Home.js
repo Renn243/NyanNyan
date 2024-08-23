@@ -74,11 +74,11 @@ const Home = () => {
     const renderOngoingItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md bg-blue-100 rounded-sm p-1'>{res.episode}</h3>
                 <h3 className='absolute bottom-0 right-0 text-md bg-blue-300 rounded-sm p-1'>{res.type}</h3>
             </div>
-            <h1 className='text-md font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
         </Link>
     );
 
@@ -89,7 +89,7 @@ const Home = () => {
                 <h3 className='absolute bottom-0 left-0 text-md bg-blue-100 rounded-sm p-1'>{res.score}</h3>
                 <h3 className='absolute bottom-0 right-0 text-md bg-blue-300 rounded-sm p-1'>{res.type}</h3>
             </div>
-            <h1 className='text-md font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
         </Link>
     );
 
@@ -108,7 +108,7 @@ const Home = () => {
                         <span className='text-lg text-blue-100'>{res.type}</span><br />
                         <p className='text-lg'>{truncateText(details.synopsis, 500)}</p>
                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='block mt-5'>
-                            <button className='flex flex-row items-center bg-blue-300 text-black rounded-lg px-4 py-2 font-semibold'>
+                            <button className='flex flex-row items-center bg-blue-300 text-black rounded-lg px-4 py-2 font-semibold duration-300 hover:scale-125'>
                                 <svg
                                     className='w-6 h-6'
                                     fill='none'
@@ -137,14 +137,15 @@ const Home = () => {
                 />
             </div>
 
-            <div className='pt-16 pb-10 px-8'>
-                <div className='w-full mb-4'>
-                    <div className='mb-8 mx-4'>
-                        <div className='flex flex-row items-center justify-center gap-5'>
+            <div className='pt-36 pb-16 px-40'>
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Ongoing Anime</h3>
-                            <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' />
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                         </div>
-                        <span className='text-white'>Ikuti perkembangan anime yang sedang berlangsung!</span>
+                        {/* <span className='text-white'>Ikuti perkembangan anime yang sedang berlangsung!</span> */}
                     </div>
 
                     <Slider
@@ -156,11 +157,12 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-4'>
-                    <div className='mb-8 mx-4'>
-                        <div className='flex flex-row items-center justify-center gap-5'>
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
                             <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' />
+                            <button className='outline outline-2 outline-blue-300 text-white px-200 text-sm font-semibold w-48 py-2 rounded-lg shadow-md'>View More</button>
                         </div>
                         <span className='text-white'></span>
                     </div>
@@ -172,8 +174,8 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-4'>
-                    <div className='mb-8 mx-4'>
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-center gap-5'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
                             <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' />
