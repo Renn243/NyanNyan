@@ -13,7 +13,7 @@ const Ongoing = () => {
     const [hasPrevPage, setHasPrevPage] = useState(false);
 
     useEffect(() => {
-        axios.get(`/anime/ongoing?order_by=latest&page=${currentPage}`)
+        axios.get(`https://anime.exoream.my.id/anime/ongoing?order_by=latest&page=${currentPage}`)
             .then((res) => {
                 setOngoingData(res.data.ongoingAnime);
                 setHasNextPage(res.data.nextPage);

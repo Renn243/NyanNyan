@@ -20,10 +20,10 @@ const Home = () => {
             setLoading(true);
             try {
                 const [ongoingRes, popularRes, movieRes, finishedRes] = await Promise.all([
-                    axios.get('/anime/ongoing?order_by=updated&page=1'),
-                    axios.get('/anime/ongoing?order_by=popular&page=1'),
-                    axios.get('/anime/movie?order_by=updated&page=1'),
-                    axios.get('/anime/finished?order_by=updated&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=popular&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/movie?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/finished?order_by=updated&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
@@ -34,7 +34,7 @@ const Home = () => {
                 const topThreeData = popularRes.data.ongoingAnime.slice(0, 3);
                 const requests = topThreeData.map((anime) => {
                     const { animeCode, animeId } = anime;
-                    return axios.get(`/anime/${animeCode}/${animeId}`)
+                    return axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}`)
                         .then((response) => ({
                             animeCode,
                             details: response.data.animeDetails,

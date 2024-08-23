@@ -11,7 +11,7 @@ const Video = () => {
     const [videoList, setVideoList] = useState([]);
 
     useEffect(() => {
-        axios.get(`/anime/${animeCode}/${animeId}/${episodeNumber}`)
+        axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}/${episodeNumber}`)
             .then(res => {
                 setEpisode(res.data);
                 setVideoList(res.data.videoList);
