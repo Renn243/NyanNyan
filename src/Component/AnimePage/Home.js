@@ -11,6 +11,7 @@ const Home = () => {
     const [movieData, setMovieData] = useState([]);
     const [popularData, setPopularData] = useState([]);
     const [finishedData, setFinishedData] = useState([]);
+    const [summerData, setSummerData] = useState({});
     const [animeDetails, setAnimeDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const [detailsLoading, setDetailsLoading] = useState(true);
@@ -19,16 +20,18 @@ const Home = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [ongoingRes, popularRes, movieRes, finishedRes] = await Promise.all([
+                const [ongoingRes, popularRes, movieRes, finishedRes, summerRes] = await Promise.all([
                     axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=updated&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/movie?order_by=updated&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/finished?order_by=updated&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/finished?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
                 setPopularData(popularRes.data.ongoingAnime);
                 setMovieData(movieRes.data.movieAnime);
+                setSummerData(summerRes.data.summerAnime);
                 setFinishedData(finishedRes.data.finishedAnime);
 
                 const topThreeData = popularRes.data.ongoingAnime.slice(0, 3);
@@ -75,10 +78,21 @@ const Home = () => {
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
-                <h3 className='absolute bottom-0 left-0 text-md bg-blue-100 rounded-sm p-1'>{res.episode}</h3>
-                <h3 className='absolute bottom-0 right-0 text-md bg-blue-300 rounded-sm p-1'>{res.type}</h3>
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.episode}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+        </Link>
+    );
+
+    const renderSummerItem = (res) => (
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+            <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
+            </div>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
         </Link>
     );
 
@@ -86,10 +100,10 @@ const Home = () => {
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
-                <h3 className='absolute bottom-0 left-0 text-md bg-blue-100 rounded-sm p-1'>{res.score}</h3>
-                <h3 className='absolute bottom-0 right-0 text-md bg-blue-300 rounded-sm p-1'>{res.type}</h3>
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
         </Link>
     );
 
@@ -145,7 +159,6 @@ const Home = () => {
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                         </div>
-                        {/* <span className='text-white'>Ikuti perkembangan anime yang sedang berlangsung!</span> */}
                     </div>
 
                     <Slider
@@ -160,9 +173,26 @@ const Home = () => {
                 <div className='w-full mb-16'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
+                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                        </div>
+                    </div>
+
+                    <Slider
+                        data={summerData}
+                        itemsPerPage={5}
+                        renderItem={renderSummerItem}
+                        showSeeMore={true}
+                    />
+                </div>
+
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
-                            <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' />
-                            <button className='outline outline-2 outline-blue-300 text-white px-200 text-sm font-semibold w-48 py-2 rounded-lg shadow-md'>View More</button>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                         </div>
                         <span className='text-white'></span>
                     </div>
@@ -175,15 +205,16 @@ const Home = () => {
                 </div>
 
                 <div className='w-full mb-16'>
-                    <div className='mb-4 mx-4'>
-                        <div className='flex flex-row items-center justify-center gap-5'>
+                    <div className='mb-8 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-5'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
-                            <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' />
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                         </div>
                         <span className='text-white'></span>
                     </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 mb-16'>
-                        {movieData.slice(0, 7).map((res) => (
+                        {movieData.slice(0, 8).map((res) => (
                             <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                 <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                                     <img className='h-64 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
@@ -195,12 +226,12 @@ const Home = () => {
                                 </div>
                             </Link>
                         ))}
-                        {movieData.length > 7 && (
+                        {/* {movieData.length > 7 && (
                             <div className='flex flex-col bg-blue-100 rounded-md items-center justify-center'>
                                 <img className='h-16 w-16' src={Paw} alt='Paw icon' />
                                 <span className='font-semibold'>See More</span>
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </div>

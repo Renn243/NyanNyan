@@ -49,7 +49,7 @@ const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, s
                 </div>
             </div>
 
-            <button onClick={prevSlide} className='absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-300 dark:bg-gray-700 p-2 rounded-full font-black opacity-20 hover:opacity-60'>
+            <button onClick={prevSlide} className='absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-300 dark:bg-gray-700 p-2 rounded-full font-black opacity-60 hover:opacity-80'>
                 <svg
                     className='w-6 h-6'
                     fill='none'
@@ -60,7 +60,7 @@ const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, s
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M15 19l-7-7 7-7'></path>
                 </svg>
             </button>
-            <button onClick={nextSlide} className='absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 dark:bg-gray-700 p-2 rounded-full font-black opacity-20 hover:opacity-60'>
+            <button onClick={nextSlide} className='absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 dark:bg-gray-700 p-2 rounded-full font-black opacity-60 hover:opacity-80'>
                 <svg
                     className='w-6 h-6'
                     fill='none'
