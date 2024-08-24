@@ -8,6 +8,7 @@ import Detail from "./Component/AnimePage/Detail";
 import Video from "./Component/AnimePage/Video";
 import Ongoing from "./Component/AnimePage/Ongoing";
 import Scroll from "./Component/AnimePage/Scroll";
+import AnimeList from "./Component/AnimePage/AnimeList";
 
 function App() {
   return (
@@ -20,6 +21,16 @@ function App() {
             <>
               <Navbar />
               <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/AnimeList"
+          element={
+            <>
+              <Navbar />
+              <AnimeList />
               <Footer />
             </>
           }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from './Loading';
+import { Link } from 'react-router-dom';
 
-const AlphabetGroupedListWithPagination = () => {
+const AnimeList = () => {
     const [animeData, setAnimeData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,17 +64,16 @@ const AlphabetGroupedListWithPagination = () => {
                 <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className='font-black dark:text-white text-2xl mb-4'>Anime List</h2>
                     <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg mb-8' />
-
-                    <div className='alphabet-list'>
+                    <div>
                         {sortedKeys.map((letter) => (
                             <div key={letter} className='mb-8'>
-                                <h3 className='text-2xl font-bold'>{letter}</h3>
+                                <h3 className='text-2xl text-white font-bold'>{letter}</h3>
                                 <ul className='mt-2'>
-                                    {groupedData[letter].map((anime) => (
-                                        <li key={anime.url} className='mt-2'>
-                                            <a href={anime.url} className='text-blue-500 hover:underline'>
-                                                {anime.title}
-                                            </a>
+                                    {groupedData[letter].map((res) => (
+                                        <li key={res.url} className='mt-2'>
+                                            <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='text-blue-300 hover:underline'>
+                                                {res.title}
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -119,4 +119,4 @@ const AlphabetGroupedListWithPagination = () => {
     );
 };
 
-export default AlphabetGroupedListWithPagination;
+export default AnimeList;

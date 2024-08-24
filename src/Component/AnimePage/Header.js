@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo1 from './Image/Logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -32,13 +33,13 @@ const Header = () => {
                             </a>
                         </li>
                         <li>
-                            <a
-                                href="/#anime-list"
+                            <Link
+                                to="/AnimeList"
                                 className="block py-2 px-3 hover:text-blue-500 duration-300 hover:scale-125"
                                 aria-current="page"
                             >
                                 Anime List
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
