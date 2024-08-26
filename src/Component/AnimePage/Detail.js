@@ -87,15 +87,19 @@ const Detail = () => {
                             <span className="inline-block bg-blue-300 text-white dark:text-gray-800 font-bold rounded-lg px-3 py-1">Episodes</span>
                         </h2>
                         <div className="flex flex-wrap gap-4">
-                            {animeData.episodeList.map((episode, index) => (
-                                <Link
-                                    key={index}
-                                    to={`/anime/${animeCode}/${animeId}/${index + 1}`}
-                                    className="bg-blue-100 py-2 px-4 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors"
-                                >
-                                    {episode.title}
-                                </Link>
-                            ))}
+                            {animeData.episodeList.map((episode, index) => {
+                                const episodeNumber = episode.title.match(/\d+/)?.[0] || index + 1;
+
+                                return (
+                                    <Link
+                                        key={index}
+                                        to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
+                                        className="bg-blue-100 py-2 px-4 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors"
+                                    >
+                                        {episode.title}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

@@ -10,9 +10,12 @@ const Video = () => {
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [videoList, setVideoList] = useState([]);
     const [animeData, setAnimeData] = useState({ episodeList: [] });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+
             try {
                 const episodeRes = await axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}/${episodeNumber}`);
                 setEpisode(episodeRes.data);
@@ -23,6 +26,8 @@ const Video = () => {
                 setSelectedVideo(episodeRes.data.videoList[0]);
             } catch (err) {
                 console.error('Error fetching episode details:', err);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -43,7 +48,7 @@ const Video = () => {
         navigate(`/anime/${animeCode}/${animeId}/${targetEpisode}`);
     };
 
-    if (!episode) {
+    if (loading) {
         return <Loading />;
     }
 
@@ -101,16 +106,20 @@ const Video = () => {
                 <h2 className="text-lg lg:text-xl mb-8 bg-blue-300 text-white dark:text-gray-800 font-bold text-center rounded-lg px-3 py-1">
                     Episode
                 </h2>
-                <div className="flex flex-wrap gap-4 grid grid-cols-3">
-                    {animeData.episodeList.length > 0 ? animeData.episodeList.map((episode, index) => (
-                        <Link
-                            key={index}
-                            to={`/anime/${animeCode}/${animeId}/${index + 1}`}
-                            className="bg-blue-100 p-1 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors shadow-md"
-                        >
-                            {episode.title}
-                        </Link>
-                    )) : <p>No episodes available</p>}
+                <div className="flex flex-wrap gap-2 grid grid-cols-3">
+                    {animeData.episodeList.map((episode, index) => {
+                        const episodeNumber = episode.title.match(/\d+/)?.[0] || index + 1;
+
+                        return (
+                            <Link
+                                key={index}
+                                to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
+                                className="bg-blue-100 p-1 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors"
+                            >
+                                {episode.title}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </div>
