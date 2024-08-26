@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo1 from './Image/Logo.png';
 
 const Header = () => {
@@ -8,7 +8,6 @@ const Header = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Periksa local storage untuk preferensi mode gelap
         const savedDarkMode = localStorage.getItem('darkMode') === 'true';
         setDarkMode(savedDarkMode);
         document.documentElement.classList.toggle('dark', savedDarkMode);
@@ -18,7 +17,6 @@ const Header = () => {
         const newDarkMode = !darkMode;
         setDarkMode(newDarkMode);
         document.documentElement.classList.toggle('dark', newDarkMode);
-        // Simpan preferensi mode gelap di local storage
         localStorage.setItem('darkMode', newDarkMode);
     };
 
@@ -30,22 +28,22 @@ const Header = () => {
     };
 
     return (
-        <nav className="bg-blue-300 dark:bg-gray-900">
+        <nav className="bgColorPrimary2">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <div className='flex flex-row gap-20'>
-                    <div className="relative flex items-center justify-center">
+                    <div className="absolute left-0 top-0 overflow-visible z-10">
                         <img
                             src={Logo1}
                             alt="Logo"
-                            className="w-10 h-10 object-cover"
+                            className="w-40"
                         />
-                        <span className="absolute font-bold text-white">NyanNyan</span>
                     </div>
-                    <ul className="font-medium flex flex-col items-center dark:text-white p-4 md:p-0 md:flex-row md:space-x-8 md:mt-0">
+
+                    <ul className="font-medium textColorSecond flex flex-col items-center p-4 ml-6 md:p-0 md:flex-row md:space-x-8 md:mt-0">
                         <li>
                             <Link
                                 to="/"
-                                className="block py-2 px-3 hover:text-blue-500 duration-300 hover:scale-125"
+                                className="block py-2 px-3 duration-300 hover:scale-125"
                                 aria-current="page"
                             >
                                 Home
@@ -54,7 +52,7 @@ const Header = () => {
                         <li>
                             <Link
                                 to="/AnimeList"
-                                className="block py-2 px-3 hover:text-blue-500 duration-300 hover:scale-125"
+                                className="block py-2 px-3 duration-300 hover:scale-125"
                                 aria-current="page"
                             >
                                 Anime List
@@ -91,7 +89,7 @@ const Header = () => {
                             checked={darkMode}
                             onChange={toggleDarkMode}
                         />
-                        <div className="w-11 h-6 bg-gray-300 dark:hover:bg-blue-500 rounded-full dark:bg-gray-600 duration-300"></div>
+                        <div className="w-11 h-6 bg-gray-600 hover:bg-yellow-500 rounded-full duration-300"></div>
                         <span className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 dark:translate-x-5 translate-x-0`}></span>
                     </label>
 
@@ -116,7 +114,7 @@ const Header = () => {
                         <input
                             type="search"
                             id="title-search"
-                            className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="block w-full p-2.5 text-sm bg-gray-600 rounded-lg border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500 placeholder-gray-500 text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                             placeholder="Search..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -143,7 +141,7 @@ const Header = () => {
                     </div>
                 </form>
             </div>
-        </nav>
+        </nav >
     );
 };
 

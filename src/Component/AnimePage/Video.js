@@ -60,7 +60,7 @@ const Video = () => {
                 </video>
                 <div className="mt-4">
                     <select
-                        className="px-4 py-2 mr-2 bg-blue-300 dark:bg-black dark:outline dark:outline-2 dark:outline-blue-300 dark:text-white dark:hover:bg-blue-300 rounded-lg"
+                        className="px-4 py-2 mr-2 bg-yellow-500 active:bg-yellow-100 focus:bg-yellow-100 dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                         onChange={handleVideoChange}
                         value={selectedVideo ? selectedVideo.url : ''}
                     >
@@ -73,7 +73,7 @@ const Video = () => {
 
                     {episode.prevEpisodeNumber && (
                         <button
-                            className="px-4 py-2 mr-2 bg-blue-100 dark:bg-black dark:outline dark:outline-2 dark:outline-blue-300 dark:text-white dark:hover:bg-blue-300 rounded-lg"
+                            className="px-4 py-2 mr-2 bg-yellow-500 dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                             onClick={() => handleNavigateEpisode(episode.prevEpisodeNumber)}
                         >
                             Prev Episode
@@ -82,7 +82,7 @@ const Video = () => {
 
                     {episode.nextEpisodeNumber && (
                         <button
-                            className="px-4 py-2 bg-blue-100 dark:bg-black dark:outline dark:outline-2 dark:outline-blue-300 dark:text-white dark:hover:bg-blue-300 rounded-lg"
+                            className="px-4 py-2 bg-yellow-500 dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                             onClick={() => handleNavigateEpisode(episode.nextEpisodeNumber)}
                         >
                             Next Episode
@@ -103,7 +103,7 @@ const Video = () => {
                 </div>
             </div>
             <div className='w-1/5 bg-gray-200 dark:bg-gray-900 p-5 rounded-lg h-96 shadow-md overflow-y-auto'>
-                <h2 className="text-lg lg:text-xl mb-8 bg-blue-300 text-white dark:text-gray-800 font-bold text-center rounded-lg px-3 py-1">
+                <h2 className="text-lg lg:text-xl mb-8 bgColorSecond text-white dark:text-gray-800 font-bold text-center rounded-lg px-3 py-1">
                     Episode
                 </h2>
                 <div className="flex flex-wrap gap-2 grid grid-cols-3">
@@ -114,7 +114,7 @@ const Video = () => {
                             <Link
                                 key={index}
                                 to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
-                                className="bg-blue-100 p-1 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors"
+                                className="bg-yellow-100 p-1 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
                             >
                                 {episode.title}
                             </Link>

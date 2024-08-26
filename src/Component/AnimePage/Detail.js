@@ -30,7 +30,7 @@ const Detail = () => {
             <div className='flex flex-row mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
                 <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className="text-lg lg:text-xl mb-2">
-                        <span className="inline-block bg-blue-300 font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Detail</span>
+                        <span className="inline-block bgColorSecond font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Detail</span>
                     </h2>
                     <table className="w-full text-left dark:text-gray-400">
                         <tbody>
@@ -75,7 +75,7 @@ const Detail = () => {
 
                     <div className="pb-6 pt-8">
                         <h2 className="text-lg lg:text-xl mb-2">
-                            <span className="inline-block bg-blue-300 font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Sinopsis</span>
+                            <span className="inline-block bgColorSecond font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Sinopsis</span>
                         </h2>
                         <span className='dark:text-gray-400'>
                             {animeData.synopsis}
@@ -84,7 +84,7 @@ const Detail = () => {
 
                     <div className="pt-8">
                         <h2 className="text-lg lg:text-xl mb-8">
-                            <span className="inline-block bg-blue-300 text-white dark:text-gray-800 font-bold rounded-lg px-3 py-1">Episodes</span>
+                            <span className="inline-block bgColorSecond text-white dark:text-gray-800 font-bold rounded-lg px-3 py-1">Episodes</span>
                         </h2>
                         <div className="flex flex-wrap gap-4">
                             {animeData.episodeList.map((episode, index) => {
@@ -94,7 +94,7 @@ const Detail = () => {
                                     <Link
                                         key={index}
                                         to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
-                                        className="bg-blue-100 py-2 px-4 font-bold rounded-lg hover:text-white hover:bg-blue-400 transition-colors"
+                                        className="bg-yellow-100 py-2 px-4 font-bold rounded-lg hover:text-white hover:bg-yellow-400 transition-colors"
                                     >
                                         {episode.title}
                                     </Link>

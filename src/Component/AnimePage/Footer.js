@@ -4,14 +4,11 @@ import Logo1 from './Image/Logo.png';
 const Footer = () => {
     return (
         <>
-            <footer className="bg-blue-100 dark:bg-gray-900">
+            <footer className="bgColorPrimary3 shadow-inner dark:bg-gray-900">
                 <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div className="flex items-center justify-center gap-40">
                         <div className='flex flex-col items-center justify-center'>
-                            <a href='/'><img src={Logo1} alt='Logo' className='h-20 w-20 duration-300 hover:scale-110' /></a>
-                            <span className='text-xl font-light text-gray-500 text-center '>
-                                NyanNyanAnime
-                            </span>
+                            <a href='/'><img src={Logo1} alt='Logo' className='w-40 duration-300 hover:scale-110' /></a>
                             <span className='text-xl pt-4 font-light text-gray-500 text-center '>
                                 "Anime Adventure with a cat touch"
                             </span>
@@ -23,7 +20,7 @@ const Footer = () => {
                             <div className="flex mt-4 sm:justify-center mb-10">
                                 <a
                                     href="#"
-                                    className="text-blue-300 hover:text-gray-500 duration-300 hover:scale-150"
+                                    className="text-yellow-500 duration-300 hover:scale-150"
                                 >
                                     <svg
                                         className="w-7 h-7"
@@ -42,7 +39,7 @@ const Footer = () => {
                                 </a>
                                 <a
                                     href="#"
-                                    className="text-blue-300 hover:text-gray-500 duration-300 hover:scale-150 ms-5"
+                                    className="text-yellow-500 duration-300 hover:scale-150 ms-5"
                                 >
                                     <svg
                                         className="w-7 h-7"
@@ -57,7 +54,7 @@ const Footer = () => {
                                 </a>
                                 <a
                                     href="#"
-                                    className="text-blue-300 hover:text-gray-500 duration-300 hover:scale-150 ms-5"
+                                    className="text-yellow-500 duration-300 hover:scale-150 ms-5"
                                 >
                                     <svg
                                         className="w-7 h-7"
@@ -76,7 +73,7 @@ const Footer = () => {
                                 </a>
                                 <a
                                     href="#"
-                                    className="text-blue-300 hover:text-gray-500 duration-300 hover:scale-150 ms-5"
+                                    className="text-yellow-500 duration-300 hover:scale-150 ms-5"
                                 >
                                     <svg
                                         className="w-7 h-7"
