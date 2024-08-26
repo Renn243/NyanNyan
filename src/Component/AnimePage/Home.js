@@ -3,8 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Slider from './Slider';
 import catimg2 from './Image/cat2.png';
+import Nyan from './Image/Nyan.png';
 import Paw from './Image/paw.png';
 import Loading from './Loading';
+import nyan2 from './Image/3.png';
+import nyan3 from './Image/4.png';
+import hellow from './Image/hellow.png';
 
 const Home = () => {
     const [ongoingData, setOngoingData] = useState([]);
@@ -18,6 +22,8 @@ const Home = () => {
     const [actionData, setActionData] = useState({});
     const [comedyData, setComedyData] = useState({});
     const [romanceData, setRomanceData] = useState({});
+    const [scrollY, setScrollY] = useState(0);
+    const [currentImage, setCurrentImage] = useState(catimg2);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,6 +78,28 @@ const Home = () => {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+
+        if (scrollPosition >= 200 && scrollPosition < 1000) {
+            setCurrentImage(hellow);
+        } else if (scrollPosition >= 1000 && scrollPosition < 1800) {
+            setCurrentImage(catimg2);
+        } else if (scrollPosition >= 1800 && scrollPosition < 2600) {
+            setCurrentImage(hellow);
+        } else {
+            setCurrentImage(catimg2);
+        }
+    };
 
     const truncateText = (text = '', maxLength) => {
         if (typeof text !== 'string') {
@@ -228,6 +256,7 @@ const Home = () => {
 
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
+                        <img src={nyan2} alt='Nyan' className='absolute right-0 opacity-50 h-52' />
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
@@ -282,6 +311,7 @@ const Home = () => {
 
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
+                        <img src={nyan3} alt='Nyan' className='absolute left-0 opacity-50 h-52' />
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
@@ -327,7 +357,7 @@ const Home = () => {
                         </div>
                         <span className='text-white'></span>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 mb-16'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 mb-8'>
                         {movieData.slice(0, 8).map((res) => (
                             <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                 <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
@@ -349,10 +379,12 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
+            <div className='flex flex-row justify-center items-center w-full'>
+                <img src={Nyan} alt='Nyan' className='w-96 mx-auto' />
+            </div>
             <img
                 className='lg:fixed lg:block hidden bottom-0 right-0 mb-4 -mb-10 -mr-10 h-56 hover:transform duration-300 hover:-translate-y-2'
-                src={catimg2}
+                src={currentImage}
                 alt='Cat'
             />
         </div>
