@@ -6,7 +6,7 @@ import Home from "./Component/AnimePage/Home";
 import NotFound from "./Component/NotFound/NotFound";
 import Detail from "./Component/AnimePage/Detail";
 import Video from "./Component/AnimePage/Video";
-import Ongoing from "./Component/AnimePage/Ongoing";
+import MoreAnime from "./Component/AnimePage/MoreAnime";
 import Scroll from "./Component/AnimePage/Scroll";
 import AnimeList from "./Component/AnimePage/AnimeList";
 
@@ -36,11 +36,21 @@ function App() {
           }
         />
         <Route
-          path="/ongoing"
+          path="/more/:type"
           element={
             <>
               <Navbar />
-              <Ongoing />
+              <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/more/genre/:type"
+          element={
+            <>
+              <Navbar />
+              <MoreAnime />
               <Footer />
             </>
           }
