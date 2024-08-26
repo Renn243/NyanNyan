@@ -53,12 +53,14 @@ const MoreAnime = () => {
     const handlePrevPage = () => {
         if (hasPrevPage) {
             setCurrentPage((prev) => prev - 1);
+            window.scrollTo(0, 0);
         }
     };
 
     const handleNextPage = () => {
         if (hasNextPage) {
             setCurrentPage((prev) => prev + 1);
+            window.scrollTo(0, 0);
         }
     };
 
