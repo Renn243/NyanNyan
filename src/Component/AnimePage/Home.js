@@ -15,17 +15,23 @@ const Home = () => {
     const [animeDetails, setAnimeDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const [detailsLoading, setDetailsLoading] = useState(true);
+    const [actionData, setActionData] = useState({});
+    const [comedyData, setComedyData] = useState({});
+    const [romanceData, setRomanceData] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [ongoingRes, popularRes, movieRes, finishedRes, summerRes] = await Promise.all([
+                const [ongoingRes, popularRes, movieRes, finishedRes, summerRes, actionRes, comedyRes, romanceRes] = await Promise.all([
                     axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=updated&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/movie?order_by=updated&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/finished?order_by=updated&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/action?order_by=popular&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/comedy?order_by=popular&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=popular&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
@@ -33,6 +39,9 @@ const Home = () => {
                 setMovieData(movieRes.data.movieAnime);
                 setSummerData(summerRes.data.summerAnime);
                 setFinishedData(finishedRes.data.finishedAnime);
+                setActionData(actionRes.data.propertiesDetails);
+                setComedyData(comedyRes.data.propertiesDetails);
+                setRomanceData(romanceRes.data.propertiesDetails);
 
                 const topThreeData = popularRes.data.ongoingAnime.slice(0, 3);
                 const requests = topThreeData.map((anime) => {
@@ -98,6 +107,39 @@ const Home = () => {
 
     const renderFinishedItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
+            <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
+            </div>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+        </Link>
+    );
+
+    const renderActionItem = (res) => (
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+            <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
+            </div>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+        </Link>
+    );
+
+    const renderComedyItem = (res) => (
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+            <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
+            </div>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+        </Link>
+    );
+
+    const renderRomanceItem = (res) => (
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
@@ -183,6 +225,57 @@ const Home = () => {
                         data={summerData}
                         itemsPerPage={5}
                         renderItem={renderSummerItem}
+                        showSeeMore={true}
+                    />
+                </div>
+
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
+                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Action Anime</h3>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                        </div>
+                    </div>
+
+                    <Slider
+                        data={actionData}
+                        itemsPerPage={5}
+                        renderItem={renderActionItem}
+                        showSeeMore={true}
+                    />
+                </div>
+
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
+                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Comedy Anime</h3>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                        </div>
+                    </div>
+
+                    <Slider
+                        data={comedyData}
+                        itemsPerPage={5}
+                        renderItem={renderComedyItem}
+                        showSeeMore={true}
+                    />
+                </div>
+
+                <div className='w-full mb-16'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
+                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                        </div>
+                    </div>
+
+                    <Slider
+                        data={romanceData}
+                        itemsPerPage={5}
+                        renderItem={renderRomanceItem}
                         showSeeMore={true}
                     />
                 </div>

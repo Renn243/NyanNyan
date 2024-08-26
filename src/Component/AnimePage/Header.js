@@ -24,13 +24,13 @@ const Header = () => {
                     </div>
                     <ul className="font-medium flex flex-col items-center dark:text-white p-4 md:p-0 md:flex-row md:space-x-8 md:mt-0">
                         <li>
-                            <a
-                                href="/#home"
+                            <Link
+                                to="/"
                                 className="block py-2 px-3 hover:text-blue-500 duration-300 hover:scale-125"
                                 aria-current="page"
                             >
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <Link
