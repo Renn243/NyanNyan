@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo1 from './Image/Logo.png';
 
@@ -7,9 +7,19 @@ const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        // Periksa local storage untuk preferensi mode gelap
+        const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+        setDarkMode(savedDarkMode);
+        document.documentElement.classList.toggle('dark', savedDarkMode);
+    }, []);
+
     const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        document.documentElement.classList.toggle('dark', !darkMode);
+        const newDarkMode = !darkMode;
+        setDarkMode(newDarkMode);
+        document.documentElement.classList.toggle('dark', newDarkMode);
+        // Simpan preferensi mode gelap di local storage
+        localStorage.setItem('darkMode', newDarkMode);
     };
 
     const handleSearch = (e) => {

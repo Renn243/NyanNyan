@@ -150,9 +150,7 @@ const Home = () => {
     );
 
     function filterText(text) {
-        // Ekspresi reguler untuk menangkap "(Sumber:" dan semua karakter setelahnya hingga akhir teks
         const filterPattern = /\(Sumber:.*$/;
-        // Mengganti bagian yang ditemukan dengan string kosong
         return text.replace(filterPattern, '').trim();
     }
 
@@ -208,7 +206,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Ongoing Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/ongoing?data=ongoingAnime">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                     </div>
@@ -228,7 +226,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/summer?data=summerAnime">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2  outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                     </div>
@@ -246,7 +244,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Action Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/action?data=propertiesDetails">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                     </div>
@@ -264,7 +262,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Comedy Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/comedy?data=propertiesDetails">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                     </div>
@@ -282,7 +280,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/romance?data=propertiesDetails">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                     </div>
@@ -300,7 +298,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/finished?data=finishedAnime">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                         <span className='text-white'></span>
@@ -318,7 +316,7 @@ const Home = () => {
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/movie?data=movieAnime">
-                                <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                                <button className='outline outline-2 outline-blue-300 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                         <span className='text-white'></span>

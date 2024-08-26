@@ -11,7 +11,7 @@ const AnimeList = () => {
     const [hasPrevPage, setHasPrevPage] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchAnimeData = async () => {
             setLoading(true);
             try {
                 const res = await axios.get(`https://anime.exoream.my.id/anime/list?page=${currentPage}`);
@@ -22,10 +22,10 @@ const AnimeList = () => {
                 console.error('Error fetching anime data:', error);
             } finally {
                 setLoading(false);
-            };
+            }
+        };
 
-            fetchData();
-        }
+        fetchAnimeData();
     }, [currentPage]);
 
     const groupDataByAlphabet = (data) => {
@@ -67,7 +67,7 @@ const AnimeList = () => {
                     <div>
                         {sortedKeys.map((letter) => (
                             <div key={letter} className='mb-8'>
-                                <h3 className='text-2xl text-white font-bold'>{letter}</h3>
+                                <h3 className='text-2xl dark:text-white font-bold'>{letter}</h3>
                                 <ul className='mt-2'>
                                     {groupedData[letter].map((res) => (
                                         <li key={res.url} className='mt-2'>
