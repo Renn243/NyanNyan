@@ -9,6 +9,7 @@ import Video from "./Component/AnimePage/Video";
 import MoreAnime from "./Component/AnimePage/MoreAnime";
 import Scroll from "./Component/AnimePage/Scroll";
 import AnimeList from "./Component/AnimePage/AnimeList";
+import SearchAnime from "./Component/AnimePage/SearchAnime";
 
 function App() {
   return (
@@ -51,6 +52,16 @@ function App() {
             <>
               <Navbar />
               <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <>
+              <Navbar />
+              <SearchAnime />
               <Footer />
             </>
           }

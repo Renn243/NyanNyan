@@ -90,7 +90,7 @@ const Home = () => {
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.episode}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
 
@@ -101,7 +101,7 @@ const Home = () => {
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
 
@@ -112,42 +112,50 @@ const Home = () => {
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
 
     const renderActionItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
 
     const renderComedyItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
 
     const renderRomanceItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='h-96 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.score}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
-            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type}</h3>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
         </Link>
     );
+
+    function filterText(text) {
+        // Ekspresi reguler untuk menangkap "(Sumber:" dan semua karakter setelahnya hingga akhir teks
+        const filterPattern = /\(Sumber:.*$/;
+        // Mengganti bagian yang ditemukan dengan string kosong
+        return text.replace(filterPattern, '').trim();
+    }
+
 
     const renderPopularItem = (res) => {
         const details = animeDetails[res.animeCode] || {};
@@ -161,8 +169,8 @@ const Home = () => {
                     <div className='text-white'>
                         <span className='text-xl font-black'>{res.title}</span><br />
                         <span className='text-lg text-blue-300'>{res.episode}</span><span className='text-white'> | </span>
-                        <span className='text-lg text-blue-100'>{res.type}</span><br />
-                        <p className='text-lg'>{truncateText(details.synopsis, 500)}</p>
+                        <span className='text-lg text-blue-100'>{res.type.join(', ')}</span><br />
+                        <p className='text-lg'>{truncateText(filterText(details.synopsis), 500)}</p>
                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='block mt-5'>
                             <button className='flex flex-row items-center bg-blue-300 text-black rounded-lg px-4 py-2 font-semibold duration-300 hover:scale-125'>
                                 <svg
@@ -194,7 +202,7 @@ const Home = () => {
             </div>
 
             <div className='pt-36 pb-16 px-40'>
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Ongoing Anime</h3>
@@ -214,7 +222,7 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
@@ -232,7 +240,7 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Action Anime</h3>
@@ -250,7 +258,7 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Comedy Anime</h3>
@@ -268,7 +276,7 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
@@ -286,7 +294,7 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
@@ -304,12 +312,12 @@ const Home = () => {
                     />
                 </div>
 
-                <div className='w-full mb-16'>
+                <div className='w-full mb-8'>
                     <div className='mb-8 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-5'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
                             {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
-                            <Link to="/more/action?data=movieAnime">
+                            <Link to="/more/movie?data=movieAnime">
                                 <button className='outline outline-2  outline-blue-300 text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
