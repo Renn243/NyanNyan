@@ -114,7 +114,7 @@ const Video = () => {
                             <Link
                                 key={index}
                                 to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
-                                className="bg-yellow-100 p-1 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
+                                className="bg-yellow-100 p-1 flex flex-row shadow-md font-bold rounded-lg items-center texs-center justify-center hover:text-white hover:bg-yellow-500 transition-colors"
                             >
                                 {episode.title}
                             </Link>

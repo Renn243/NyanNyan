@@ -11,6 +11,7 @@ const MoreAnime = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [hasPrevPage, setHasPrevPage] = useState(false);
+    const [orderBy, setOrderBy] = useState('popular');
 
     const queryParams = new URLSearchParams(search);
     const data = queryParams.get('data') || 'ongoingAnime';
@@ -20,9 +21,9 @@ const MoreAnime = () => {
         console.log('Is Genre Path:', isGenrePath);
 
         if (isGenrePath) {
-            return `https://anime.exoream.my.id/anime/properties/genre/${type}?order_by=latest&page=${currentPage}`;
+            return `https://anime.exoream.my.id/anime/properties/genre/${type}?order_by=${orderBy}&page=${currentPage}`;
         } else {
-            return `https://anime.exoream.my.id/anime/${type}?order_by=popular&page=${currentPage}`;
+            return `https://anime.exoream.my.id/anime/${type}?order_by=${orderBy}&page=${currentPage}`;
         }
     };
 
@@ -46,7 +47,7 @@ const MoreAnime = () => {
         };
 
         fetchData();
-    }, [type, data, currentPage]);
+    }, [type, data, currentPage, orderBy]);
 
     const truncateText = (text, maxLength) => text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 
@@ -64,16 +65,32 @@ const MoreAnime = () => {
         }
     };
 
+    const handleOrderChange = (event) => {
+        setOrderBy(event.target.value);
+        setCurrentPage(1);
+    };
+
     if (loading) {
         return <Loading />;
     }
 
     return (
-        <div className='bg-gray-100 dark:bg-black min-h-screen'>
+        <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
             <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
-                <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
-                    <div className='flex flex-row items-center mb-2'>
+                <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
+                    <div className='flex flex-row items-center justify-between mb-2'>
                         <span className='font-black dark:text-white text-2xl capitalize'>{type} Anime</span>
+                        <select
+                            value={orderBy}
+                            onChange={handleOrderChange}
+                            className='font-semibold rounded-md p-2 bgColorSecond'
+                        >
+                            <option value="popular">Popular</option>
+                            <option value="latest">Latest</option>
+                            <option value="most_viewed">Most Viewed</option>
+                            <option value="oldest">Oldest</option>
+                            <option value="updated">Updated</option>
+                        </select>
                     </div>
                     <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg mb-8' />
 
@@ -94,7 +111,7 @@ const MoreAnime = () => {
                         <button
                             onClick={handlePrevPage}
                             disabled={!hasPrevPage}
-                            className={`p-2 rounded-full shadow-lg ${hasPrevPage ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                            className={`p-2 rounded-full shadow-lg ${hasPrevPage ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                         >
                             <svg
                                 className='w-6 h-6'
@@ -109,7 +126,7 @@ const MoreAnime = () => {
                         <button
                             onClick={handleNextPage}
                             disabled={!hasNextPage}
-                            className={`p-2 rounded-full shadow-lg ${hasNextPage ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                            className={`p-2 rounded-full shadow-lg ${hasNextPage ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                         >
                             <svg
                                 className='w-6 h-6'
