@@ -57,7 +57,7 @@ const SearchAnime = () => {
                     <div className='flex flex-row items-center mb-2'>
                         <span className='font-black dark:text-white text-2xl capitalize'>Search Results for "{query}"</span>
                     </div>
-                    <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg mb-8' />
+                    <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
 
                     {searchResults.length > 0 ? (
                         <>

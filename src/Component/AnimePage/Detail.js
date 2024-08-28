@@ -26,15 +26,15 @@ const Detail = () => {
     }
 
     return (
-        <div className='bg-gray-100 dark:bg-black'>
+        <div className='bgColorPrimary3 dark:bg-black'>
             <div className='flex flex-row mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
-                <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
+                <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className="text-lg lg:text-xl mb-2">
-                        <span className="inline-block bgColorSecond font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Detail</span>
+                        <span className="inline-block bgColorSecond font-bold dark:text-gray-800 rounded-lg px-3 py-1">Detail</span>
                     </h2>
                     <table className="w-full text-left dark:text-gray-400">
                         <tbody>
-                            <tr className="bg-gray-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700">
                                 <th className="px-3 py-3">Tipe</th>
                                 <td className="px-3 py-3">{animeData.type}</td>
                             </tr>
@@ -42,7 +42,7 @@ const Detail = () => {
                                 <th className="px-3 py-3">Episode</th>
                                 <td className="px-3 py-3">{animeData.episode}</td>
                             </tr>
-                            <tr className="bg-gray-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700">
                                 <th className="px-3 py-3">Status</th>
                                 <td className="px-3 py-3">{animeData.status}</td>
                             </tr>
@@ -50,7 +50,7 @@ const Detail = () => {
                                 <th className="px-3 py-3">Tayang</th>
                                 <td className="px-3 py-3">{animeData.released}</td>
                             </tr>
-                            <tr className="bg-gray-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700">
                                 <th className="px-3 py-3">Musim</th>
                                 <td className="px-3 py-3">{animeData.season}</td>
                             </tr>
@@ -58,7 +58,7 @@ const Detail = () => {
                                 <th className="px-3 py-3">Durasi</th>
                                 <td className="px-3 py-3">{animeData.duration}</td>
                             </tr>
-                            <tr className="bg-gray-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700">
                                 <th className="px-3 py-3">Genre</th>
                                 <td className="px-3 py-3">{animeData.genres.join(', ')}</td>
                             </tr>
@@ -66,7 +66,7 @@ const Detail = () => {
                                 <th className="px-3 py-3">Studio</th>
                                 <td className="px-3 py-3">{animeData.studio}</td>
                             </tr>
-                            <tr className="bg-gray-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700">
                                 <th className="px-3 py-3">Rating</th>
                                 <td className="px-3 py-3">{animeData.score}</td>
                             </tr>
@@ -75,7 +75,7 @@ const Detail = () => {
 
                     <div className="pb-6 pt-8">
                         <h2 className="text-lg lg:text-xl mb-2">
-                            <span className="inline-block bgColorSecond font-bold dark:text-gray-800 text-white rounded-lg px-3 py-1">Sinopsis</span>
+                            <span className="inline-block bgColorSecond font-bold dark:text-gray-800 rounded-lg px-3 py-1">Sinopsis</span>
                         </h2>
                         <span className='dark:text-gray-400'>
                             {animeData.synopsis}
@@ -84,7 +84,7 @@ const Detail = () => {
 
                     <div className="pt-8">
                         <h2 className="text-lg lg:text-xl mb-8">
-                            <span className="inline-block bgColorSecond text-white dark:text-gray-800 font-bold rounded-lg px-3 py-1">Episodes</span>
+                            <span className="inline-block bgColorSecond dark:text-gray-800 font-bold rounded-lg px-3 py-1">Episodes</span>
                         </h2>
                         <div className="flex flex-wrap gap-4">
                             {animeData.episodeList.map((episode, index) => {
@@ -94,7 +94,7 @@ const Detail = () => {
                                     <Link
                                         key={index}
                                         to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
-                                        className="bg-yellow-100 py-2 px-4 font-bold rounded-lg hover:text-white hover:bg-yellow-400 transition-colors"
+                                        className="bg-yellow-100 py-2 px-4 font-bold rounded-lg shadow-md hover:text-white hover:bg-yellow-400 transition-colors"
                                     >
                                         {episode.title}
                                     </Link>

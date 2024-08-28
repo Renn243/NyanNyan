@@ -92,7 +92,7 @@ const MoreAnime = () => {
                             <option value="updated">Updated</option>
                         </select>
                     </div>
-                    <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg mb-8' />
+                    <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
                         {animeData.map((res) => (

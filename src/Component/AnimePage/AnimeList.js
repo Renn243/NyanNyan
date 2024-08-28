@@ -61,11 +61,11 @@ const AnimeList = () => {
     const sortedKeys = Object.keys(groupedData).sort();
 
     return (
-        <div className='bg-gray-100 dark:bg-black min-h-screen'>
+        <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
             <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
-                <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
+                <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className='font-black dark:text-white text-2xl mb-4'>Anime List</h2>
-                    <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg mb-8' />
+                    <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
                     <div>
                         {sortedKeys.map((letter) => (
                             <div key={letter} className='mb-8'>
@@ -73,7 +73,7 @@ const AnimeList = () => {
                                 <ul className='mt-2'>
                                     {groupedData[letter].map((res) => (
                                         <li key={res.url} className='mt-2'>
-                                            <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='text-blue-300 hover:underline'>
+                                            <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='text-yellow-500 hover:underline'>
                                                 {res.title}
                                             </Link>
                                         </li>
@@ -87,7 +87,7 @@ const AnimeList = () => {
                         <button
                             onClick={handlePrevPage}
                             disabled={!hasPrevPage}
-                            className={`p-2 rounded-full shadow-lg ${hasPrevPage ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                            className={`p-2 rounded-full shadow-lg ${hasPrevPage ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                         >
                             <svg
                                 className='w-6 h-6'
@@ -102,7 +102,7 @@ const AnimeList = () => {
                         <button
                             onClick={handleNextPage}
                             disabled={!hasNextPage}
-                            className={`p-2 rounded-full shadow-lg ${hasNextPage ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                            className={`p-2 rounded-full shadow-lg ${hasNextPage ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                         >
                             <svg
                                 className='w-6 h-6'
