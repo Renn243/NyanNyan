@@ -10,6 +10,7 @@ import MoreAnime from "./Component/AnimePage/MoreAnime";
 import Scroll from "./Component/AnimePage/Scroll";
 import AnimeList from "./Component/AnimePage/AnimeList";
 import SearchAnime from "./Component/AnimePage/SearchAnime";
+import Genre from "./Component/AnimePage/Genre";
 
 function App() {
   return (
@@ -32,6 +33,16 @@ function App() {
             <>
               <Navbar />
               <AnimeList />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Genre"
+          element={
+            <>
+              <Navbar />
+              <Genre />
               <Footer />
             </>
           }

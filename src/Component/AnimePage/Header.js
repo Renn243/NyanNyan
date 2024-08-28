@@ -58,6 +58,15 @@ const Header = () => {
                                 Anime List
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                to="/Genre"
+                                className="block py-2 px-3 duration-300 hover:scale-125"
+                                aria-current="page"
+                            >
+                                Genre
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="flex items-center space-x-2">
