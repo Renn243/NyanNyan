@@ -79,6 +79,16 @@ function App() {
           }
         />
         <Route
+          path="/more/country/:type"
+          element={
+            <>
+              <Navbar />
+              <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
           path="/search"
           element={
             <>

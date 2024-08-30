@@ -106,8 +106,8 @@ const Schedule = () => {
                                                     <h3 className='text-xs font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.time}</h3>
                                                 </div>
                                             </div>
-                                            <h1 className='text-xs dark:text-white font-semibold pt-3'>{truncateText(res.title, 15)}</h1>
-                                            <h3 className='text-xs text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
+                                            <h1 className='text-xs dark:text-white font-semibold'>{truncateText(res.title, 15)}</h1>
+                                            <h3 className='text-xs text-gray-500 font-semibold mb-4'>{res.type.join(', ')}</h3>
                                         </Link>
                                     ))}
                                 </div>

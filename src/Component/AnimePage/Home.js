@@ -22,14 +22,14 @@ const Home = () => {
     const [actionData, setActionData] = useState({});
     const [comedyData, setComedyData] = useState({});
     const [romanceData, setRomanceData] = useState({});
-    const [scrollY, setScrollY] = useState(0);
+    const [chinaData, setChinaData] = useState({});
     const [currentImage, setCurrentImage] = useState(catimg2);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [ongoingRes, popularRes, movieRes, finishedRes, summerRes, actionRes, comedyRes, romanceRes] = await Promise.all([
+                const [ongoingRes, popularRes, movieRes, finishedRes, summerRes, actionRes, comedyRes, romanceRes, chinaRes] = await Promise.all([
                     axios.get('https://anime.exoream.my.id/anime/ongoing?order_by=updated&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/movie?order_by=updated&page=1'),
@@ -37,7 +37,8 @@ const Home = () => {
                     axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/properties/genre/action?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/properties/genre/comedy?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=popular&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=popular&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/country/cn?order_by=popular&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
@@ -48,6 +49,8 @@ const Home = () => {
                 setActionData(actionRes.data.propertiesDetails);
                 setComedyData(comedyRes.data.propertiesDetails);
                 setRomanceData(romanceRes.data.propertiesDetails);
+                setChinaData(chinaRes.data.propertiesDetails);
+
 
                 const topThreeData = popularRes.data.summerAnime.slice(0, 6);
                 console.log(topThreeData)
@@ -168,6 +171,17 @@ const Home = () => {
     );
 
     const renderRomanceItem = (res) => (
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+            <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
+            </div>
+            <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
+            <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
+        </Link>
+    );
+
+    const renderChinaItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
@@ -343,6 +357,24 @@ const Home = () => {
                         data={finishedData}
                         itemsPerPage={4}
                         renderItem={renderFinishedItem}
+                    />
+                </div>
+
+                <div className='w-full mb-8'>
+                    <div className='mb-4 mx-4'>
+                        <div className='flex flex-row items-center justify-between gap-10'>
+                            <h3 className='font-black dark:text-white text-2xl w-1/2'>China Anime</h3>
+                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
+                            <Link to="/more/country/cn?data=propertiesDetails">
+                                <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
+                            </Link>
+                        </div>
+                        <span className='text-white'></span>
+                    </div>
+                    <Slider
+                        data={chinaData}
+                        itemsPerPage={5}
+                        renderItem={renderChinaItem}
                     />
                 </div>
 

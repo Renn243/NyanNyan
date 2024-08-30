@@ -18,10 +18,11 @@ const MoreAnime = () => {
 
     const getApiUrl = () => {
         const isGenrePath = pathname.includes('/genre/');
-        console.log('Is Genre Path:', isGenrePath);
 
-        if (isGenrePath) {
+        if (pathname.includes('/genre/')) {
             return `https://anime.exoream.my.id/anime/properties/genre/${type}?order_by=${orderBy}&page=${currentPage}`;
+        } else if (pathname.includes('/country/')) {
+            return `https://anime.exoream.my.id/anime/properties/country/${type}?order_by=${orderBy}&page=${currentPage}`;
         } else {
             return `https://anime.exoream.my.id/anime/${type}?order_by=${orderBy}&page=${currentPage}`;
         }
