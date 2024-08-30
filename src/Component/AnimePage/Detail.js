@@ -9,6 +9,7 @@ const Detail = () => {
     const [animeData, setAnimeData] = useState(null);
     const [batch, setBatch] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [batchId, setBatchId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,6 +17,7 @@ const Detail = () => {
             try {
                 const res = await axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}`);
                 setAnimeData(res.data.animeDetails);
+                setBatchId(res.data.animeDetails.batchId);
             } catch (error) {
                 console.error('Error fetching anime details:', error);
             } finally {
@@ -27,22 +29,22 @@ const Detail = () => {
     }, [animeCode, animeId]);
 
     useEffect(() => {
-        if (animeData && animeData.batchId) {
-            const fetchBatchData = async () => {
+        const fetchBatchData = async () => {
+            if (batchId && batchId !== "?") {
                 setLoading(true);
                 try {
-                    const res = await axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}/batch/${animeData.batchId}`);
+                    const res = await axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}/batch/${batchId}`);
                     setBatch(res.data);
                 } catch (error) {
                     console.error('Error fetching batch data:', error);
                 } finally {
                     setLoading(false);
                 }
-            };
+            }
+        };
 
-            fetchBatchData();
-        }
-    }, [animeData, animeCode, animeId]);
+        fetchBatchData();
+    }, [batchId, animeCode, animeId]);
 
     if (loading) {
         return <Loading />;
@@ -97,7 +99,7 @@ const Detail = () => {
                                 <th className="px-3 py-3">Studio</th>
                                 <td className="px-3 py-3">{animeData.studio}</td>
                             </tr>
-                            <tr className="bg-yellow-100 dark:bg-gray-700">
+                            <tr className="bg-yellow-100 dark:bg-gray-700 rounded-lgs">
                                 <th className="px-3 py-3">Rating</th>
                                 <td className="px-3 py-3">{animeData.ratings}</td>
                             </tr>
@@ -140,31 +142,34 @@ const Detail = () => {
                             })}
                         </div>
                     </div>
-                    <div className="pt-16">
-                        <h2 className="text-lg lg:text-xl mb-8">
-                            <span className="inline-block bgColorSecond dark:text-gray-800 font-bold rounded-lg px-3 py-1">Download Batch :</span>
-                        </h2>
-                        {batch?.downloadLinks?.map((downloadItem, index) => (
-                            downloadItem.links?.length > 0 && (
-                                <div key={index} className='mb-10'>
-                                    <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
-                                    <hr className='w-2/3 h-1 bg-yellow-500 mb-6' />
-                                    {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
-                                        <Link
-                                            key={linkIndex}
-                                            to={download.url}
-                                            target='_blank'
-                                            className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
-                                        >
-                                            <button>
-                                                {download.title}
-                                            </button>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )
-                        ))}
-                    </div>
+
+                    {batchId && batchId !== "?" && (
+                        <div className="pt-16">
+                            <h2 className="text-lg lg:text-xl mb-8">
+                                <span className="inline-block bgColorSecond dark:text-gray-800 font-bold rounded-lg px-3 py-1">Download Batch :</span>
+                            </h2>
+                            {batch?.downloadLinks?.map((downloadItem, index) => (
+                                downloadItem.links?.length > 0 && (
+                                    <div key={index} className='mb-10'>
+                                        <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
+                                        <hr className='w-2/3 h-1 bg-yellow-500 mb-6' />
+                                        {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
+                                            <Link
+                                                key={linkIndex}
+                                                to={download.url}
+                                                target='_blank'
+                                                className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
+                                            >
+                                                <button>
+                                                    {download.title}
+                                                </button>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                    )}
 
                 </div>
 
