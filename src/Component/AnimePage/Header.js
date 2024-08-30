@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Logo1 from './Image/Logo.png';
+import Logo from './Image/Logo2.png';
 
 const Header = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -33,7 +33,7 @@ const Header = () => {
                 <div className='flex flex-row gap-20'>
                     <div className="absolute left-0 top-0 overflow-visible z-10">
                         <img
-                            src={Logo1}
+                            src={Logo}
                             alt="Logo"
                             className="w-40"
                         />

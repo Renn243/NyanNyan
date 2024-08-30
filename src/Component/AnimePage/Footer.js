@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo1 from './Image/Logo.png';
+import Logo from './Image/Logo2.png';
 
 const Footer = () => {
     return (
@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div className="flex items-center justify-center gap-40">
                         <div className='flex flex-col items-center justify-center'>
-                            <a href='/'><img src={Logo1} alt='Logo' className='w-40 duration-300 hover:scale-110' /></a>
+                            <a href='/'><img src={Logo} alt='Logo' className='w-40 duration-300 hover:scale-110' /></a>
                             <span className='text-xl pt-4 font-light text-gray-500 text-center '>
                                 "Anime Adventure with a cat touch"
                             </span>
