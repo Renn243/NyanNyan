@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const Schedule = () => {
     const [animeData, setAnimeData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
     const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -17,7 +16,7 @@ const Schedule = () => {
             try {
                 const currentDays = days.slice(currentDayIndex, currentDayIndex + 3);
                 const promises = currentDays.map(day =>
-                    axios.get(`https://anime.exoream.my.id/anime/schedule?scheduled_day=${day}&page=${currentPage}`)
+                    axios.get(`https://anime.exoream.my.id/anime/schedule?scheduled_day=${day}&page=1`)
                 );
                 const responses = await Promise.all(promises);
                 const fetchedData = responses.map(res => res.data.scheduleAnime);
@@ -30,21 +29,19 @@ const Schedule = () => {
         };
 
         fetchAnimeData();
-    }, [currentPage, currentDayIndex]);
+    }, [currentDayIndex]);
 
     const truncateText = (text, maxLength) => text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 
     const handleNext = () => {
         if (currentDayIndex < days.length - 3) {
             setCurrentDayIndex(currentDayIndex + 3);
-            setCurrentPage(1);
         }
     };
 
     const handlePrev = () => {
         if (currentDayIndex > 0) {
             setCurrentDayIndex(currentDayIndex - 3);
-            setCurrentPage(1);
         }
     };
 
@@ -60,7 +57,7 @@ const Schedule = () => {
                         <button
                             onClick={handlePrev}
                             disabled={currentDayIndex === 0}
-                            className='font-semibold p-2 bgColorSecond rounded-md'
+                            className={`font-semibold p-2 rounded-md ${currentDayIndex === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bgColorSecond'}`}
                         >
                             <svg
                                 className='w-6 h-6'
@@ -78,7 +75,7 @@ const Schedule = () => {
                         <button
                             onClick={handleNext}
                             disabled={currentDayIndex >= days.length - 3}
-                            className='font-semibold p-2 bgColorSecond rounded-md'
+                            className={`font-semibold p-2 rounded-md ${currentDayIndex >= days.length - 3 ? 'bg-gray-400 cursor-not-allowed' : 'bgColorSecond'}`}
                         >
                             <svg
                                 className='w-6 h-6'
@@ -94,8 +91,12 @@ const Schedule = () => {
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
                         {animeData.map((dayData, index) => (
                             <div key={index} className='relative'>
-                                <h2 className='font-bold text-lg dark:text-white capitalize mb-4'>{days[currentDayIndex + index]}</h2>
-                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mr-10'>
+                                {days[currentDayIndex + index] && (
+                                    <h2 className='font-semibold text-2xl dark:text-white capitalize mb-4'>
+                                        {days[currentDayIndex + index].slice(0, 3)}
+                                    </h2>
+                                )}
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mr-10'>
                                     {dayData.map((res) => (
                                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                             <div className='relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
