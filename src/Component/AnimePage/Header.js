@@ -67,6 +67,15 @@ const Header = () => {
                                 Genre
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                to="/Schedule"
+                                className="block py-2 px-3 duration-300 hover:scale-125"
+                                aria-current="page"
+                            >
+                                Schedule
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="flex items-center space-x-2">

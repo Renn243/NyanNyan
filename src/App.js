@@ -11,6 +11,7 @@ import Scroll from "./Component/AnimePage/Scroll";
 import AnimeList from "./Component/AnimePage/AnimeList";
 import SearchAnime from "./Component/AnimePage/SearchAnime";
 import Genre from "./Component/AnimePage/Genre";
+import Schedule from "./Component/AnimePage/Schedule";
 
 function App() {
   return (
@@ -43,6 +44,16 @@ function App() {
             <>
               <Navbar />
               <Genre />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Schedule"
+          element={
+            <>
+              <Navbar />
+              <Schedule />
               <Footer />
             </>
           }

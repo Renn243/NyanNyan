@@ -99,7 +99,7 @@ const MoreAnime = () => {
                             <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                 <div className='w-full relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                                     <img className='h-64 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
-                                    <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-blue-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
+                                    <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
                                 </div>
                                 <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 15)}</h1>
                                 <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
