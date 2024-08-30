@@ -7,14 +7,21 @@ const Schedule = () => {
     const [animeData, setAnimeData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentDay, setCurrentDay] = useState('monday');
+    const [currentDayIndex, setCurrentDayIndex] = useState(0);
+
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
     useEffect(() => {
         const fetchAnimeData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(`https://anime.exoream.my.id/anime/schedule?scheduled_day=${currentDay}&page=${currentPage}`);
-                setAnimeData(res.data.scheduleAnime);
+                const currentDays = days.slice(currentDayIndex, currentDayIndex + 3);
+                const promises = currentDays.map(day =>
+                    axios.get(`https://anime.exoream.my.id/anime/schedule?scheduled_day=${day}&page=${currentPage}`)
+                );
+                const responses = await Promise.all(promises);
+                const fetchedData = responses.map(res => res.data.scheduleAnime);
+                setAnimeData(fetchedData);
             } catch (error) {
                 console.error('Error fetching anime data:', error);
             } finally {
@@ -23,13 +30,22 @@ const Schedule = () => {
         };
 
         fetchAnimeData();
-    }, [currentPage, currentDay]);
+    }, [currentPage, currentDayIndex]);
 
     const truncateText = (text, maxLength) => text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 
-    const handleDayChange = (event) => {
-        setCurrentDay(event.target.value);
-        setCurrentPage(1);
+    const handleNext = () => {
+        if (currentDayIndex < days.length - 3) {
+            setCurrentDayIndex(currentDayIndex + 3);
+            setCurrentPage(1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentDayIndex > 0) {
+            setCurrentDayIndex(currentDayIndex - 3);
+            setCurrentPage(1);
+        }
     };
 
     if (loading) {
@@ -40,34 +56,64 @@ const Schedule = () => {
         <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
             <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
-                    <div className='flex flex-row items-center justify-between mb-2'>
-                        <span className='font-black dark:text-white text-2xl capitalize'>{currentDay} Anime</span>
-                        <select
-                            value={currentDay}
-                            onChange={handleDayChange}
-                            className='font-semibold rounded-md p-2 bgColorSecond'
+                    <div className='flex flex-row items-center justify-between mb-20'>
+                        <button
+                            onClick={handlePrev}
+                            disabled={currentDayIndex === 0}
+                            className='font-semibold p-2 bgColorSecond rounded-md'
                         >
-                            <option value="monday">Monday</option>
-                            <option value="tuesday">Tuesday</option>
-                            <option value="wednesday">Wednesday</option>
-                            <option value="thursday">Thursday</option>
-                            <option value="friday">Friday</option>
-                            <option value="saturday">Saturday</option>
-                            <option value="sunday">Sunday</option>
-                        </select>
+                            <svg
+                                className='w-6 h-6'
+                                fill='none'
+                                stroke='currentColor'
+                                viewBox='0 0 24 24'
+                                xmlns='http://www.w3.org/2000/svg'
+                            >
+                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M15 19l-7-7 7-7'></path>
+                            </svg>
+                        </button>
+                        <span className='font-black dark:text-white text-2xl capitalize'>
+                            Anime Schedule
+                        </span>
+                        <button
+                            onClick={handleNext}
+                            disabled={currentDayIndex >= days.length - 3}
+                            className='font-semibold p-2 bgColorSecond rounded-md'
+                        >
+                            <svg
+                                className='w-6 h-6'
+                                fill='none'
+                                stroke='currentColor'
+                                viewBox='0 0 24 24'
+                                xmlns='http://www.w3.org/2000/svg'
+                            >
+                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 5l7 7-7 7'></path>
+                            </svg>
+                        </button>
                     </div>
-                    <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
-
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
-                        {animeData.map((res) => (
-                            <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
-                                <div className='w-full relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                                    <img className='h-64 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
-                                    <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.time}</h3>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
+                        {animeData.map((dayData, index) => (
+                            <div key={index} className='relative'>
+                                <h2 className='font-bold text-lg dark:text-white capitalize mb-4'>{days[currentDayIndex + index]}</h2>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mr-10'>
+                                    {dayData.map((res) => (
+                                        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
+                                            <div className='relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
+                                                <img className='h-32 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                                                <div className='absolute bottom-0 left-0 flex flex-row gap-2'>
+                                                    <h3 className='text-xs font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.day}</h3>
+                                                    <h3 className='text-xs font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.time}</h3>
+                                                </div>
+                                            </div>
+                                            <h1 className='text-xs dark:text-white font-semibold pt-3'>{truncateText(res.title, 15)}</h1>
+                                            <h3 className='text-xs text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
+                                        </Link>
+                                    ))}
                                 </div>
-                                <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 15)}</h1>
-                                <h3 className='text-md rounded-sm text-gray-500 font-semibold'>{res.type.join(', ')}</h3>
-                            </Link>
+                                {index < animeData.length - 1 && (
+                                    <div className='absolute top-0 right-0 h-full border-2 border-yellow-300'></div>
+                                )}
+                            </div>
                         ))}
                     </div>
                 </div>

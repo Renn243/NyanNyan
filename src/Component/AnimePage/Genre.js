@@ -33,11 +33,11 @@ const Genre = () => {
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h1 className='font-black dark:text-white text-2xl capitalize mb-2'>Anime Genre</h1>
                     <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4'>
                         {genreData.map((res) => (
                             <Link
                                 to={`/more/genre/${res.propertiesId}?data=propertiesDetails`}
-                                className='bgColorSecond font-semibold p-4 rounded-lg hover:bg-yellow-600'
+                                className='bgColorSecond text-sm font-semibold p-4 rounded-lg hover:bg-yellow-600'
                             >
                                 {res.name}
                             </Link>
