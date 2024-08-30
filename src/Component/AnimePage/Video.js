@@ -101,6 +101,30 @@ const Video = () => {
                     <h5 className='pt-4 font-semibold'>Synopsis :</h5>
                     <p>{animeData.synopsis}</p>
                 </div>
+                <div className='mt-10 shadow-md py-6 px-4'>
+                    <h3 className='font-semibold mb-4'>Download Link : </h3>
+                    {episode?.downloadLinks?.map((downloadItem, index) => (
+                        downloadItem.links?.length > 0 && (
+                            <div key={index} className='mb-10'>
+                                <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
+                                <hr className='w-2/3 h-1 bg-yellow-500 mb-6' />
+                                {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
+                                    <Link
+                                        key={linkIndex}
+                                        to={download.url}
+                                        target='blank'
+                                        className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
+                                    >
+                                        <button>
+                                            {download.title}
+                                        </button>
+                                    </Link>
+                                ))}
+                            </div>
+                        )
+                    ))}
+
+                </div>
             </div>
             <div className='w-1/5 bgColorPrimary3 dark:bg-gray-900 p-5 rounded-lg h-96 shadow-md overflow-y-auto'>
                 <h2 className="text-lg lg:text-xl mb-8 bgColorSecond dark:text-gray-800 font-bold text-center rounded-lg px-3 py-1">

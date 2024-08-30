@@ -51,9 +51,9 @@ const SearchAnime = () => {
     }
 
     return (
-        <div className='bg-gray-100 dark:bg-black min-h-screen'>
+        <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
             <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
-                <div className='bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
+                <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <div className='flex flex-row items-center mb-2'>
                         <span className='font-black dark:text-white text-2xl capitalize'>Search Results for "{query}"</span>
                     </div>

@@ -17,12 +17,16 @@ const MoreAnime = () => {
     const data = queryParams.get('data') || 'ongoingAnime';
 
     const getApiUrl = () => {
-        const isGenrePath = pathname.includes('/genre/');
-
         if (pathname.includes('/genre/')) {
             return `https://anime.exoream.my.id/anime/properties/genre/${type}?order_by=${orderBy}&page=${currentPage}`;
         } else if (pathname.includes('/country/')) {
             return `https://anime.exoream.my.id/anime/properties/country/${type}?order_by=${orderBy}&page=${currentPage}`;
+        } else if (pathname.includes('/studio/')) {
+            return `https://anime.exoream.my.id/anime/properties/studio/${type}?order_by=${orderBy}&page=${currentPage}`;
+        } else if (pathname.includes('/season/')) {
+            return `https://anime.exoream.my.id/anime/properties/season/${type}?order_by=${orderBy}&page=${currentPage}`;
+        } else if (pathname.includes('/type/')) {
+            return `https://anime.exoream.my.id/anime/properties/type/${type}?order_by=${orderBy}&page=${currentPage}`;
         } else {
             return `https://anime.exoream.my.id/anime/${type}?order_by=${orderBy}&page=${currentPage}`;
         }
@@ -33,6 +37,7 @@ const MoreAnime = () => {
             setLoading(true);
             try {
                 const res = await axios.get(getApiUrl());
+                console.log(res)
                 if (res.data && res.data[data]) {
                     setAnimeData(res.data[data]);
                     setHasNextPage(res.data.nextPage);
@@ -86,6 +91,8 @@ const MoreAnime = () => {
                             onChange={handleOrderChange}
                             className='font-semibold rounded-md p-2 bgColorSecond'
                         >
+                            <option value="ascending">A - Z</option>
+                            <option value="descending">Z - A</option>
                             <option value="popular">Popular</option>
                             <option value="latest">Latest</option>
                             <option value="most_viewed">Most Viewed</option>

@@ -60,11 +60,11 @@ const Header = () => {
                         </li>
                         <li>
                             <Link
-                                to="/Genre"
+                                to="/Category"
                                 className="block py-2 px-3 duration-300 hover:scale-125"
                                 aria-current="page"
                             >
-                                Genre
+                                Category
                             </Link>
                         </li>
                         <li>

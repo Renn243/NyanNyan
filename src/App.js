@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path="/Genre"
+          path="/Category"
           element={
             <>
               <Navbar />
@@ -80,6 +80,36 @@ function App() {
         />
         <Route
           path="/more/country/:type"
+          element={
+            <>
+              <Navbar />
+              <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/more/season/:type"
+          element={
+            <>
+              <Navbar />
+              <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/more/type/:type"
+          element={
+            <>
+              <Navbar />
+              <MoreAnime />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/more/studio/:type"
           element={
             <>
               <Navbar />

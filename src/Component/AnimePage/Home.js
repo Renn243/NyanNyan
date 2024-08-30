@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Slider from './Slider';
 import catimg2 from './Image/cat2.png';
 import Nyan from './Image/nyan2.png';
-import Paw from './Image/paw.png';
 import Loading from './Loading';
 import hellow from './Image/hellow.png';
 
@@ -37,7 +36,7 @@ const Home = () => {
                     axios.get('https://anime.exoream.my.id/anime/properties/genre/action?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/properties/genre/comedy?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/country/cn?order_by=popular&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/properties/country/cn?order_by=most_viewed&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
@@ -50,9 +49,7 @@ const Home = () => {
                 setRomanceData(romanceRes.data.propertiesDetails);
                 setChinaData(chinaRes.data.propertiesDetails);
 
-
                 const topThreeData = popularRes.data.summerAnime.slice(0, 6);
-                console.log(topThreeData)
                 const requests = topThreeData.map((anime) => {
                     const { animeCode, animeId } = anime;
                     return axios.get(`https://anime.exoream.my.id/anime/${animeCode}/${animeId}`)
@@ -126,7 +123,7 @@ const Home = () => {
     );
 
     const renderSummerItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -159,7 +156,7 @@ const Home = () => {
     );
 
     const renderComedyItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -181,7 +178,7 @@ const Home = () => {
     );
 
     const renderChinaItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -208,8 +205,8 @@ const Home = () => {
                     <img className='h-[32rem] w-96 rounded-lg object-cover m-10 transform rotate-12 shadow-lg shadow-yellow-300' src={res.image} alt={res.title} />
                     <div className='text-white'>
                         <span className='text-xl font-black'>{res.title}</span><br />
-                        <span className='text-lg text-gray-400'>*{res.ratings}</span><span className='text-white'> | </span>
-                        <span className='text-lg text-gray-400'>{res.type.join(', ')}</span><br />
+                        <span className='text-lg font-bold text-gray-400'>{res.ratings}</span><span className='text-white'> | </span>
+                        <span className='text-lg font-bold text-gray-400'>{res.type.join(', ')}</span><br />
                         <p className='text-lg'>{truncateText(filterText(details.synopsis), 500)}</p>
                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='block mt-5'>
                             <button className='flex flex-row items-center bgColorSecond text-black rounded-lg px-4 py-2 font-semibold duration-300 hover:scale-125'>
@@ -370,7 +367,7 @@ const Home = () => {
                     </div>
                     <Slider
                         data={chinaData}
-                        itemsPerPage={5}
+                        itemsPerPage={4}
                         renderItem={renderChinaItem}
                     />
                 </div>
