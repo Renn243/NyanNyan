@@ -31,7 +31,7 @@ const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, s
                     {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                         <div
                             key={slideIndex}
-                            className='flex'
+                            className='flex justify-center sm:justify-start'
                             style={{ width: `${100 / totalSlides}%` }}
                         >
                             {data.slice(slideIndex * itemsPerPage, (slideIndex + 1) * itemsPerPage).map(renderItem)}

@@ -46,7 +46,7 @@ const Header = () => {
                     <li>
                         <Link
                             to="/"
-                            className="block sm:hidden pl-6 duration-300 hover:scale-125"
+                            className="block sm:hidden pl-8 sm:pl-0 duration-300 hover:scale-125"
                             aria-current="page"
                         >
                             <FontAwesomeIcon icon={faHome} className='h-6' />
@@ -62,7 +62,7 @@ const Header = () => {
                     <li>
                         <Link
                             to="/AnimeList"
-                            className="block sm:hidden pl-6  duration-300 hover:scale-125"
+                            className="block sm:hidden pl-8 sm:pl-0 duration-300 hover:scale-125"
                             aria-current="page"
                         >
                             <FontAwesomeIcon icon={faList} className='h-6' />
@@ -78,7 +78,7 @@ const Header = () => {
                     <li>
                         <Link
                             to="/Category"
-                            className="block sm:hidden pl-6  duration-300 hover:scale-125"
+                            className="block sm:hidden pl-8 sm:pl-0 duration-300 hover:scale-125"
                             aria-current="page"
                         >
                             <FontAwesomeIcon icon={faTags} className='h-6' />
@@ -94,7 +94,7 @@ const Header = () => {
                     <li>
                         <Link
                             to="/Schedule"
-                            className="block sm:hidden pl-6 duration-300 hover:scale-125"
+                            className="block sm:hidden pl-8 sm:pl-0 duration-300 hover:scale-125"
                             aria-current="page"
                         >
                             <FontAwesomeIcon icon={faCalendar} className='h-6' />
@@ -133,7 +133,7 @@ const Header = () => {
                 />
 
                 <button
-                    className="block sm:hidden pr-4"
+                    className="block sm:hidden pr-10"
                     onClick={() => setShowModal(true)}
                 >
                     <FontAwesomeIcon icon={faSearch} className="textColorSecond h-6" />
@@ -159,7 +159,7 @@ const Header = () => {
             {
                 showModal && (
                     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-                        <div className="relative bg-white p-4 rounded-lg shadow-lg">
+                        <div className="relative bg-white pr-10 p-4 rounded-lg shadow-lg">
                             <form onSubmit={handleSearch} className="flex items-center">
                                 <input
                                     type="search"

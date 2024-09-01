@@ -95,7 +95,7 @@ const Home = () => {
     }
 
     const renderOngoingItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.episode}</h3>
@@ -106,7 +106,7 @@ const Home = () => {
     );
 
     const renderSummerItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -117,7 +117,7 @@ const Home = () => {
     );
 
     const renderFinishedItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.score}</h3>
@@ -128,7 +128,7 @@ const Home = () => {
     );
 
     const renderActionItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -139,7 +139,7 @@ const Home = () => {
     );
 
     const renderComedyItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -150,7 +150,7 @@ const Home = () => {
     );
 
     const renderRomanceItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -161,7 +161,7 @@ const Home = () => {
     );
 
     const renderChinaItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-full sm:w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -221,7 +221,7 @@ const Home = () => {
                 />
             </div>
 
-            <div className='pt-36 pb-16 sm:px-40'>
+            <div className='pt-16 sm:pt-36 sm:pb-16 sm:px-40'>
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
@@ -373,7 +373,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='flex flex-row justify-center items-center w-full'>
-                <img src={Nyan} alt='Nyan' className='w-96 mx-auto' />
+                <img src={Nyan} alt='Nyan' className='w-40 sm:w-96 mx-auto' />
             </div>
         </div>
     );
