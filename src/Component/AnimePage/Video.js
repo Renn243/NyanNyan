@@ -100,12 +100,12 @@ const Video = () => {
                 <div className='sm:hidden w-full'>
                     <button
                         onClick={toggleDropdown}
-                        className='w-full bgColorPrimary3 dark:bg-gray-900 px-2 pt-6 rounded-lg flex items-center shadow-md pb-6 justify-between'
+                        className='w-full bgColorPrimary3 dark:bg-gray-900 px-2 pt-2 mt-4 rounded-lg flex items-center shadow-md pb-2 mb-4 justify-between'
                     >
-                        <h2 className="text-lg lg:text-xl bgColorSecond px-4 py-2 rounded-lg dark:text-gray-800">
+                        <h2 className="text-lg lg:text-xl px-4 py-2 bgColorSecond dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg">
                             Episode
                         </h2>
-                        <FontAwesomeIcon icon={isDropdownOpen ? faCaretUp : faCaretDown} />
+                        <FontAwesomeIcon icon={isDropdownOpen ? faCaretUp : faCaretDown} className='dark:text-white' />
                     </button>
 
                     {isDropdownOpen && (
@@ -141,11 +141,11 @@ const Video = () => {
                     <p>{animeData.synopsis}</p>
                 </div>
                 <div className='mt-10 shadow-md py-6 px-4'>
-                    <h3 className='font-semibold mb-4'>Download Link : </h3>
+                    <h3 className='font-semibold mb-4 dark:text-white'>Download Link : </h3>
                     {episode?.downloadLinks?.map((downloadItem, index) => (
                         downloadItem.links?.length > 0 && (
                             <div key={index} className='mb-10'>
-                                <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
+                                <h3 className='mb-4 font-black dark:text-white'>{downloadItem.quality}</h3>
                                 <hr className='w-full sm:w-2/3 h-1 bg-yellow-500 mb-6' />
                                 <div className="flex flex-wrap gap-2">
                                     {downloadItem.links.slice(0, 6).map((download, linkIndex) => (

@@ -24,6 +24,8 @@ const Home = () => {
     const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
 
     const itemsPerPage = isMobile ? 1 : isTablet ? 3 : 5;
+    const text = isMobile ? 250 : isTablet ? 250 : 500;
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,11 +36,11 @@ const Home = () => {
                     axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/movie?order_by=updated&page=1'),
                     axios.get('https://anime.exoream.my.id/anime/finished?order_by=updated&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/summer?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/genre/action?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/genre/comedy?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=popular&page=1'),
-                    axios.get('https://anime.exoream.my.id/anime/properties/country/cn?order_by=most_viewed&page=1')
+                    axios.get('https://anime.exoream.my.id/anime/summer?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/action?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/comedy?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/genre/romance?order_by=updated&page=1'),
+                    axios.get('https://anime.exoream.my.id/anime/properties/country/cn?order_by=updated&page=1')
                 ]);
 
                 setOngoingData(ongoingRes.data.ongoingAnime);
@@ -182,13 +184,13 @@ const Home = () => {
             <div className='relative w-full bg-white shadow overflow-hidden'>
                 <img className='absolute inset-0 sm:h-[32rem] w-full object-cover' src={res.image} alt={res.title} />
                 <div className='absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent mix-blend-multiply'></div>
-                <div className='relative flex top-1/2 left-0 px-8 sm:px-40 transform -translate-y-1/2 leading-8 sm:leading-10 gap-20 items-center z-10'>
+                <div className='relative flex top-1/2 left-0 px-8 sm:px-40 py-20 sm:py-8 transform -translate-y-1/2 leading-8 sm:leading-10 gap-20 items-center z-10'>
                     <img className='hidden sm:block h-[32rem] rounded-lg object-cover m-10 transform rotate-12 shadow-lg shadow-yellow-300' src={res.image} alt={res.title} />
                     <div className='text-white'>
                         <span className='sm:text-xl font-black'>{res.title}</span><br />
                         <span className='sm:text-lg font-bold text-gray-400'>{res.ratings}</span><span className='text-white'> | </span>
                         <span className='sm:text-lg font-bold text-gray-400'>{res.type.join(', ')}</span><br />
-                        <p className='sm:text-lg'>{truncateText(filterText(details.synopsis), 500)}</p>
+                        <p className='sm:text-lg'>{truncateText(filterText(details.synopsis), text)}</p>
                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='block mt-5'>
                             <button className='flex flex-row items-center bgColorSecond text-black rounded-lg px-4 py-2 font-semibold duration-300 hover:scale-125'>
                                 <svg
@@ -216,7 +218,7 @@ const Home = () => {
                     data={popularData.slice(0, 6)}
                     itemsPerPage={1}
                     renderItem={renderPopularItem}
-                    autoPlayInterval={10000}
+                    autoPlayInterval={7000}
                 />
             </div>
 

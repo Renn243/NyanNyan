@@ -133,7 +133,7 @@ const Header = () => {
                 />
 
                 <button
-                    className="block sm:hidden pr-10"
+                    className="block sm:hidden pr-4"
                     onClick={() => setShowModal(true)}
                 >
                     <FontAwesomeIcon icon={faSearch} className="textColorSecond h-6" />
@@ -159,7 +159,7 @@ const Header = () => {
             {
                 showModal && (
                     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-                        <div className="relative bg-white pr-10 p-4 rounded-lg shadow-lg">
+                        <div className="relative bg-white dark:bg-gray-900 pr-10 p-4 rounded-lg shadow-lg">
                             <form onSubmit={handleSearch} className="flex items-center">
                                 <input
                                     type="search"
@@ -170,14 +170,14 @@ const Header = () => {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                                 <button type="submit" className="ml-2 ">
-                                    <FontAwesomeIcon icon={faSearch} />
+                                    <FontAwesomeIcon icon={faSearch} className='dark:text-white' />
                                 </button>
                             </form>
                             <button
                                 className="absolute top-2 right-2 "
                                 onClick={() => setShowModal(false)}
                             >
-                                <FontAwesomeIcon icon={faTimes} />
+                                <FontAwesomeIcon icon={faTimes} className='dark:text-white' />
                             </button>
                         </div>
                     </div>
