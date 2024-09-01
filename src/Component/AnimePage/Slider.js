@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import Paw from './Image/paw.png';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 
-const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, seeMoreLink }) => {
+const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, autoPlayInterval }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const sliderRef = useRef(null);
+    const startXRef = useRef(0);
+    const [touching, setTouching] = useState(false);
 
     const totalSlides = Math.ceil(data.length / itemsPerPage);
 
@@ -17,8 +18,71 @@ const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, s
         if (onPrev) onPrev();
     };
 
+    useEffect(() => {
+        let interval;
+        if (autoPlayInterval) {
+            interval = setInterval(nextSlide, autoPlayInterval);
+        }
+
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [autoPlayInterval, nextSlide]);
+
+    const handleTouchStart = (e) => {
+        startXRef.current = e.touches[0].clientX;
+        setTouching(true);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!touching) return;
+        const deltaX = e.touches[0].clientX - startXRef.current;
+        if (deltaX < -50) { // Swipe left
+            nextSlide();
+            setTouching(false);
+        } else if (deltaX > 50) { // Swipe right
+            prevSlide();
+            setTouching(false);
+        }
+    };
+
+    const handleTouchEnd = () => {
+        setTouching(false);
+    };
+
+    const handleMouseDown = (e) => {
+        startXRef.current = e.clientX;
+        setTouching(true);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!touching) return;
+        const deltaX = e.clientX - startXRef.current;
+        if (deltaX < -50) { // Swipe left
+            nextSlide();
+            setTouching(false);
+        } else if (deltaX > 50) { // Swipe right
+            prevSlide();
+            setTouching(false);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setTouching(false);
+    };
+
     return (
-        <div className='relative'>
+        <div
+            className='relative'
+            ref={sliderRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp} // Ensure to handle mouse leaving the area
+        >
             <div className='overflow-hidden'>
                 <div
                     className='flex'
@@ -35,15 +99,6 @@ const Slider = ({ data, itemsPerPage, renderItem, onNext, onPrev, showSeeMore, s
                             style={{ width: `${100 / totalSlides}%` }}
                         >
                             {data.slice(slideIndex * itemsPerPage, (slideIndex + 1) * itemsPerPage).map(renderItem)}
-                            {slideIndex === totalSlides - 1 && showSeeMore && (
-                                <Link
-                                    className='flex flex-col items-center justify-center relative overflow-hidden rounded-lg cursor-pointer px-10 mx-2'
-                                    to={seeMoreLink}
-                                >
-                                    <img className='h-16 w-16' src={Paw} alt="Logo" />
-                                    <span className='text-xl font-semibold'>See More</span>
-                                </Link>
-                            )}
                         </div>
                     ))}
                 </div>

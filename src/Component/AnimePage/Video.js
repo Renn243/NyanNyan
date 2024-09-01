@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Loading from './Loading';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 const Video = () => {
     const { animeCode, animeId, episodeNumber } = useParams();
@@ -11,6 +13,8 @@ const Video = () => {
     const [videoList, setVideoList] = useState([]);
     const [animeData, setAnimeData] = useState({ episodeList: [] });
     const [loading, setLoading] = useState(true);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,17 +52,21 @@ const Video = () => {
         navigate(`/anime/${animeCode}/${animeId}/${targetEpisode}`);
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     if (loading) {
         return <Loading />;
     }
 
     return (
-        <div className="flex flex-row bgColorPrimary3 dark:bg-black py-20 lg:px-40 gap-4">
+        <div className="flex flex-row bgColorPrimary3 dark:bg-black py-8 sm:py-20 lg:px-40 gap-4">
             <div className='sm:w-4/5'>
                 <video className="w-full h-auto rounded-lg" controls key={selectedVideo ? selectedVideo.url : ''}>
                     <source src={selectedVideo ? selectedVideo.url : ''} type={selectedVideo ? selectedVideo.type : ''} />
                 </video>
-                <div className="mt-4">
+                <div className="mt-4 px-2 sm:px-0">
                     <select
                         className="px-4 py-2 mr-2 bgColorSecond active:bg-yellow-100 dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                         onChange={handleVideoChange}
@@ -76,7 +84,7 @@ const Video = () => {
                             className="px-4 py-2 mr-2 bgColorSecond dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                             onClick={() => handleNavigateEpisode(episode.prevEpisodeNumber)}
                         >
-                            Prev Episode
+                            <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
                     )}
 
@@ -85,8 +93,39 @@ const Video = () => {
                             className="px-4 py-2 bgColorSecond dark:bg-black dark:outline dark:outline-3 dark:outline-yellow-500 dark:text-white dark:hover:bg-yellow-500 rounded-lg"
                             onClick={() => handleNavigateEpisode(episode.nextEpisodeNumber)}
                         >
-                            Next Episode
+                            <FontAwesomeIcon icon={faChevronRight} />
                         </button>
+                    )}
+                </div>
+                <div className='sm:hidden w-full'>
+                    <button
+                        onClick={toggleDropdown}
+                        className='w-full bgColorPrimary3 dark:bg-gray-900 px-2 pt-6 rounded-lg flex items-center shadow-md pb-6 justify-between'
+                    >
+                        <h2 className="text-lg lg:text-xl bgColorSecond px-4 py-2 rounded-lg dark:text-gray-800">
+                            Episode
+                        </h2>
+                        <FontAwesomeIcon icon={isDropdownOpen ? faCaretUp : faCaretDown} />
+                    </button>
+
+                    {isDropdownOpen && (
+                        <div className='bgColorPrimary3 dark:bg-gray-900 p-5 rounded-lg shadow-md mt-2'>
+                            <div className="grid grid-cols-3 gap-2">
+                                {animeData.episodeList.map((episode, index) => {
+                                    const episodeNumber = episode.title.match(/\d+/)?.[0] || index + 1;
+
+                                    return (
+                                        <Link
+                                            key={index}
+                                            to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
+                                            className="bg-yellow-100 p-1 flex flex-row shadow-md font-bold rounded-lg items-center text-center justify-center hover:text-white hover:bg-yellow-500 transition-colors"
+                                        >
+                                            {episode.title}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     )}
                 </div>
                 <div className='pt-10 dark:text-white px-4 sm:px-0'>

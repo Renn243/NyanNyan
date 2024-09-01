@@ -218,6 +218,7 @@ const Home = () => {
                     data={popularData.slice(0, 6)}
                     itemsPerPage={1}
                     renderItem={renderPopularItem}
+                    autoPlayInterval={10000}
                 />
             </div>
 
