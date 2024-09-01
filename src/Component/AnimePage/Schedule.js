@@ -51,7 +51,7 @@ const Schedule = () => {
 
     return (
         <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
-            <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
+            <div className='flex flex-col mx-auto pb-20 pt-10 sm:px-40 gap-10'>
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <div className='flex flex-row items-center justify-between mb-20'>
                         <button
@@ -69,7 +69,7 @@ const Schedule = () => {
                                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M15 19l-7-7 7-7'></path>
                             </svg>
                         </button>
-                        <span className='font-black dark:text-white text-2xl capitalize'>
+                        <span className='font-black dark:text-white px-10 sm:text-2xl capitalize'>
                             Anime Schedule
                         </span>
                         <button
@@ -88,7 +88,7 @@ const Schedule = () => {
                             </svg>
                         </button>
                     </div>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
+                    <div className='grid grid-cols-1 sm:grid-cols-3 gap-10'>
                         {animeData.map((dayData, index) => (
                             <div key={index} className='relative'>
                                 {days[currentDayIndex + index] && (
@@ -96,7 +96,7 @@ const Schedule = () => {
                                         {days[currentDayIndex + index].slice(0, 3)}
                                     </h2>
                                 )}
-                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mr-10'>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-2 sm:mr-10'>
                                     {dayData.map((res) => (
                                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                             <div className='relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
@@ -112,7 +112,7 @@ const Schedule = () => {
                                     ))}
                                 </div>
                                 {index < animeData.length - 1 && (
-                                    <div className='absolute top-0 right-0 h-full border-2 border-yellow-300'></div>
+                                    <div className='hidden sm:block absolute top-0 right-0 h-full border-2 border-yellow-300'></div>
                                 )}
                             </div>
                         ))}

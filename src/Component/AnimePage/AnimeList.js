@@ -62,9 +62,9 @@ const AnimeList = () => {
 
     return (
         <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
-            <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
+            <div className='flex flex-col mx-auto pb-20 pt-10 sm:px-40 gap-10'>
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
-                    <h2 className='font-black dark:text-white text-2xl mb-4'>Anime List</h2>
+                    <h2 className='font-black dark:text-white sm:text-2xl mb-4'>Anime List</h2>
                     <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
                     <div>
                         {sortedKeys.map((letter) => (
