@@ -20,8 +20,6 @@ const Home = () => {
     const [comedyData, setComedyData] = useState({});
     const [romanceData, setRomanceData] = useState({});
     const [chinaData, setChinaData] = useState({});
-    // const [scrollY, setScrollY] = useState(0);
-    // const [currentImage, setCurrentImage] = useState(catimg2);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,28 +76,6 @@ const Home = () => {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
-
-    // const handleScroll = () => {
-    //     const scrollPosition = window.scrollY;
-
-    //     if (scrollPosition >= 200 && scrollPosition < 1000) {
-    //         setCurrentImage(hellow);
-    //     } else if (scrollPosition >= 1000 && scrollPosition < 1800) {
-    //         setCurrentImage(catimg2);
-    //     } else if (scrollPosition >= 1800 && scrollPosition < 2600) {
-    //         setCurrentImage(hellow);
-    //     } else {
-    //         setCurrentImage(catimg2);
-    //     }
-    // };
-
     const truncateText = (text = '', maxLength) => {
         if (typeof text !== 'string') {
             return '';
@@ -114,7 +90,7 @@ const Home = () => {
     const renderOngoingItem = (res) => (
         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='sm:h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.episode}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
@@ -199,15 +175,15 @@ const Home = () => {
 
         return (
             <div className='relative w-full bg-white shadow overflow-hidden'>
-                <img className='absolute inset-0 h-[32rem] w-full object-cover' src={res.image} alt={res.title} />
+                <img className='absolute inset-0 sm:h-[32rem] w-full object-cover' src={res.image} alt={res.title} />
                 <div className='absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent mix-blend-multiply'></div>
-                <div className='relative flex top-1/2 left-0 px-40 transform -translate-y-1/2 leading-10 gap-20 items-center z-10'>
-                    <img className='h-[32rem] w-96 rounded-lg object-cover m-10 transform rotate-12 shadow-lg shadow-yellow-300' src={res.image} alt={res.title} />
+                <div className='relative flex top-1/2 left-0 px-8 sm:px-40 transform -translate-y-1/2 leading-8 sm:leading-10 gap-20 items-center z-10'>
+                    <img className='hidden sm:block h-[32rem] rounded-lg object-cover m-10 transform rotate-12 shadow-lg shadow-yellow-300' src={res.image} alt={res.title} />
                     <div className='text-white'>
-                        <span className='text-xl font-black'>{res.title}</span><br />
-                        <span className='text-lg font-bold text-gray-400'>{res.ratings}</span><span className='text-white'> | </span>
-                        <span className='text-lg font-bold text-gray-400'>{res.type.join(', ')}</span><br />
-                        <p className='text-lg'>{truncateText(filterText(details.synopsis), 500)}</p>
+                        <span className='sm:text-xl font-black'>{res.title}</span><br />
+                        <span className='sm:text-lg font-bold text-gray-400'>{res.ratings}</span><span className='text-white'> | </span>
+                        <span className='sm:text-lg font-bold text-gray-400'>{res.type.join(', ')}</span><br />
+                        <p className='sm:text-lg'>{truncateText(filterText(details.synopsis), 500)}</p>
                         <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='block mt-5'>
                             <button className='flex flex-row items-center bgColorSecond text-black rounded-lg px-4 py-2 font-semibold duration-300 hover:scale-125'>
                                 <svg
@@ -245,7 +221,6 @@ const Home = () => {
                             <div className='font-black dark:text-white text-2xl w-1/2'>
                                 <h3>Ongoing Anime</h3>
                             </div>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/ongoing?data=ongoingAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>
                                     View More
@@ -268,7 +243,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/summer?data=summerAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -286,7 +260,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Action Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/action?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -304,7 +277,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Comedy Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/comedy?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -322,7 +294,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/genre/romance?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -340,7 +311,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/finished?data=finishedAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -358,7 +328,6 @@ const Home = () => {
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>China Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/country/cn?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -376,7 +345,6 @@ const Home = () => {
                     <div className='mb-8 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-5'>
                             <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
-                            {/* <hr className='w-full h-1 bg-black dark:bg-blue-300 rounded-lg' /> */}
                             <Link to="/more/movie?data=movieAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -396,23 +364,12 @@ const Home = () => {
                                 </div>
                             </Link>
                         ))}
-                        {/* {movieData.length > 7 && (
-                            <div className='flex flex-col bg-blue-100 rounded-md items-center justify-center'>
-                                <img className='h-16 w-16' src={Paw} alt='Paw icon' />
-                                <span className='font-semibold'>See More</span>
-                            </div>
-                        )} */}
                     </div>
                 </div>
             </div>
             <div className='flex flex-row justify-center items-center w-full'>
                 <img src={Nyan} alt='Nyan' className='w-96 mx-auto' />
             </div>
-            {/* <img
-                className='lg:fixed lg:block hidden bottom-0 right-0 mb-4 -mb-10 -mr-10 h-56 hover:transform duration-300 hover:-translate-y-2'
-                src={Nyan}
-                alt='Cat'
-            /> */}
         </div>
     );
 };
