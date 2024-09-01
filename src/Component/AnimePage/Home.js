@@ -6,6 +6,8 @@ import catimg2 from './Image/cat2.png';
 import Nyan from './Image/nyan2.png';
 import Loading from './Loading';
 import hellow from './Image/hellow.png';
+import { useMediaQuery } from 'react-responsive';
+
 
 const Home = () => {
     const [ongoingData, setOngoingData] = useState([]);
@@ -20,6 +22,10 @@ const Home = () => {
     const [comedyData, setComedyData] = useState({});
     const [romanceData, setRomanceData] = useState({});
     const [chinaData, setChinaData] = useState({});
+    const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
+    const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
+
+    const itemsPerPage = isMobile ? 1 : isTablet ? 3 : 5;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,6 +82,7 @@ const Home = () => {
         fetchData();
     }, []);
 
+
     const truncateText = (text = '', maxLength) => {
         if (typeof text !== 'string') {
             return '';
@@ -88,9 +95,9 @@ const Home = () => {
     }
 
     const renderOngoingItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                <img className='sm:h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.episode}</h3>
             </div>
             <h1 className='text-md dark:text-white font-semibold pt-3'>{truncateText(res.title, 20)}</h1>
@@ -99,7 +106,7 @@ const Home = () => {
     );
 
     const renderSummerItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -110,7 +117,7 @@ const Home = () => {
     );
 
     const renderFinishedItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.score}</h3>
@@ -121,7 +128,7 @@ const Home = () => {
     );
 
     const renderActionItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -132,7 +139,7 @@ const Home = () => {
     );
 
     const renderComedyItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -143,7 +150,7 @@ const Home = () => {
     );
 
     const renderRomanceItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/5 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/5 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -154,7 +161,7 @@ const Home = () => {
     );
 
     const renderChinaItem = (res) => (
-        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none w-1/4 p-4'>
+        <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId} className='flex-none sm:w-1/4 p-4'>
             <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
                 <img className='h-80 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
                 <h3 className='absolute bottom-0 left-0 text-md font-semibold bg-yellow-500/60 text-white rounded-md p-1'>{res.ratings}</h3>
@@ -214,11 +221,11 @@ const Home = () => {
                 />
             </div>
 
-            <div className='pt-36 pb-16 px-40'>
+            <div className='pt-36 pb-16 sm:px-40'>
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <div className='font-black dark:text-white text-2xl w-1/2'>
+                            <div className='font-black dark:text-white sm:text-2xl w-1/2'>
                                 <h3>Ongoing Anime</h3>
                             </div>
                             <Link to="/more/ongoing?data=ongoingAnime">
@@ -232,17 +239,15 @@ const Home = () => {
 
                     <Slider
                         data={ongoingData}
-                        itemsPerPage={5}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderOngoingItem}
-                        showSeeMore={true}
-                        seeMoreLink="/more/ongoing?data=ongoingAnime"
                     />
                 </div>
 
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Summer Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Summer Anime</h3>
                             <Link to="/more/summer?data=summerAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -251,7 +256,7 @@ const Home = () => {
 
                     <Slider
                         data={summerData}
-                        itemsPerPage={5}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderSummerItem}
                     />
                 </div>
@@ -259,7 +264,7 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Action Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Action Anime</h3>
                             <Link to="/more/genre/action?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -268,7 +273,7 @@ const Home = () => {
 
                     <Slider
                         data={actionData}
-                        itemsPerPage={5}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderActionItem}
                     />
                 </div>
@@ -276,7 +281,7 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Comedy Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Comedy Anime</h3>
                             <Link to="/more/genre/comedy?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -285,7 +290,7 @@ const Home = () => {
 
                     <Slider
                         data={comedyData}
-                        itemsPerPage={5}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderComedyItem}
                     />
                 </div>
@@ -293,7 +298,7 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Romance Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Romance Anime</h3>
                             <Link to="/more/genre/romance?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -302,7 +307,7 @@ const Home = () => {
 
                     <Slider
                         data={romanceData}
-                        itemsPerPage={5}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderRomanceItem}
                     />
                 </div>
@@ -310,7 +315,7 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Finished Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Finished Anime</h3>
                             <Link to="/more/finished?data=finishedAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -319,7 +324,7 @@ const Home = () => {
                     </div>
                     <Slider
                         data={finishedData}
-                        itemsPerPage={4}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderFinishedItem}
                     />
                 </div>
@@ -327,7 +332,7 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-4 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-10'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>China Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>China Anime</h3>
                             <Link to="/more/country/cn?data=propertiesDetails">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
@@ -336,7 +341,7 @@ const Home = () => {
                     </div>
                     <Slider
                         data={chinaData}
-                        itemsPerPage={4}
+                        itemsPerPage={itemsPerPage}
                         renderItem={renderChinaItem}
                     />
                 </div>
@@ -344,22 +349,22 @@ const Home = () => {
                 <div className='w-full mb-8'>
                     <div className='mb-8 mx-4'>
                         <div className='flex flex-row items-center justify-between gap-5'>
-                            <h3 className='font-black dark:text-white text-2xl w-1/2'>Movies Anime</h3>
+                            <h3 className='font-black dark:text-white sm:text-2xl w-1/2'>Movies Anime</h3>
                             <Link to="/more/movie?data=movieAnime">
                                 <button className='outline outline-3 outline-yellow-500 hover:bg-yellow-500 dark:text-white text-xs px-200 font-semibold w-32 py-2 rounded-lg shadow-md'>View More</button>
                             </Link>
                         </div>
                         <span className='text-white'></span>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 mb-8'>
+                    <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 px-4 mb-8'>
                         {movieData.slice(0, 8).map((res) => (
                             <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                 <div className='w-full bg-white shadow relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
-                                    <img className='h-64 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
-                                    <h3 className='absolute bottom-0 left-0 px-2 py-2 text-md font-semibold text-white'>{truncateText(res.title, 20)}</h3>
+                                    <img className='h-32 sm:h-64 w-full rounded-lg object-cover' src={res.image} alt={res.title} />
+                                    <h3 className='absolute bottom-0 left-0 px-2 py-2 text-xs sm:text-md font-semibold text-white'>{truncateText(res.title, 20)}</h3>
                                     <div className='absolute top-0 left-0 px-2 py-2'>
-                                        <span className='text-xs font-semibold bg-blue-100 rounded-sm px-2'>{res.score}</span>
-                                        <span className='text-xs font-semibold bg-blue-300 rounded-sm px-2 mx-2'>{res.type}</span>
+                                        <span className='text-xs font-semibold bg-yellow-100 rounded-lg px-2'>{res.score}</span>
+                                        <span className='text-xs font-semibold bg-yellow-300 rounded-lg px-2 mx-2'>{res.type}</span>
                                     </div>
                                 </div>
                             </Link>
