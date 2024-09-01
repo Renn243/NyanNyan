@@ -151,8 +151,8 @@ const Detail = () => {
                             {batch?.downloadLinks?.map((downloadItem, index) => (
                                 downloadItem.links?.length > 0 && (
                                     <div key={index} className='mb-10'>
-                                        <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
-                                        <hr className='w-2/3 h-1 bg-yellow-500 mb-6' />
+                                        <h3 className='mb-4 font-black dark:text-white'>{downloadItem.quality}</h3>
+                                        <hr className='w-4/5 h-1 bg-yellow-500 mb-6' />
                                         {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
                                             <Link
                                                 key={linkIndex}
