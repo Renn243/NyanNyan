@@ -53,8 +53,8 @@ const Video = () => {
     }
 
     return (
-        <div className="flex flex-row bgColorPrimary3 dark:bg-black py-20 lg:px-40 px-10 gap-4">
-            <div className='w-4/5'>
+        <div className="flex flex-row bgColorPrimary3 dark:bg-black py-20 lg:px-40 gap-4">
+            <div className='sm:w-4/5'>
                 <video className="w-full h-auto rounded-lg" controls key={selectedVideo ? selectedVideo.url : ''}>
                     <source src={selectedVideo ? selectedVideo.url : ''} type={selectedVideo ? selectedVideo.type : ''} />
                 </video>
@@ -89,7 +89,7 @@ const Video = () => {
                         </button>
                     )}
                 </div>
-                <div className='pt-10 dark:text-white'>
+                <div className='pt-10 dark:text-white px-4 sm:px-0'>
                     <div className='flex flex-row items-center gap-4'>
                         <img src={animeData.image} alt='Anime Image' className='h-32 w-32 rounded-lg' />
 
@@ -107,30 +107,32 @@ const Video = () => {
                         downloadItem.links?.length > 0 && (
                             <div key={index} className='mb-10'>
                                 <h3 className='mb-4 font-black'>{downloadItem.quality}</h3>
-                                <hr className='w-2/3 h-1 bg-yellow-500 mb-6' />
-                                {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
-                                    <Link
-                                        key={linkIndex}
-                                        to={download.url}
-                                        target='blank'
-                                        className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
-                                    >
-                                        <button>
-                                            {download.title}
-                                        </button>
-                                    </Link>
-                                ))}
+                                <hr className='w-full sm:w-2/3 h-1 bg-yellow-500 mb-6' />
+                                <div className="flex flex-wrap gap-2">
+                                    {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
+                                        <Link
+                                            key={linkIndex}
+                                            to={download.url}
+                                            target='_blank'
+                                            className="bg-yellow-100 text-lg px-4 py-2 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
+                                        >
+                                            <button>
+                                                {download.title}
+                                            </button>
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
                         )
                     ))}
 
                 </div>
             </div>
-            <div className='w-1/5 bgColorPrimary3 dark:bg-gray-900 p-5 rounded-lg h-96 shadow-md overflow-y-auto'>
+            <div className='hidden sm:block w-1/5 bgColorPrimary3 dark:bg-gray-900 p-5 rounded-lg h-96 shadow-md overflow-y-auto'>
                 <h2 className="text-lg lg:text-xl mb-8 bgColorSecond dark:text-gray-800 font-bold text-center rounded-lg px-3 py-1">
                     Episode
                 </h2>
-                <div className="flex flex-wrap gap-2 grid grid-cols-3">
+                <div className="flex gap-2 grid grid-cols-3">
                     {animeData.episodeList.map((episode, index) => {
                         const episodeNumber = episode.title.match(/\d+/)?.[0] || index + 1;
 
@@ -138,7 +140,7 @@ const Video = () => {
                             <Link
                                 key={index}
                                 to={`/anime/${animeCode}/${animeId}/${episodeNumber}`}
-                                className="bg-yellow-100 p-1 flex flex-row shadow-md font-bold rounded-lg items-center texs-center justify-center hover:text-white hover:bg-yellow-500 transition-colors"
+                                className="bg-yellow-100 p-1 flex flex-row shadow-md font-bold rounded-lg items-center text-center justify-center hover:text-white hover:bg-yellow-500 transition-colors"
                             >
                                 {episode.title}
                             </Link>

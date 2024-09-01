@@ -52,7 +52,21 @@ const Detail = () => {
 
     return (
         <div className='bgColorPrimary3 dark:bg-black'>
-            <div className='flex flex-row mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
+            <div className='flex flex-col sm:flex-row mx-auto pb-20 pt-10 md:px-40 gap-10'>
+                <div className="block sm:hidden lg:w-1/3 rounded-xl sm:ml-4 mt-4 px-4 sm:pl-8 lg:mt-0">
+                    <img
+                        className="object-cover object-center w-full h-auto rounded-xl"
+                        id="animeimg"
+                        src={animeData.image}
+                        alt={animeData.title}
+                    />
+                    <div className="mt-4">
+                        <h1 className="text-2xl lg:text-3xl mb-2 lg:mb-4 text-gray-600 dark:text-gray-400 font-black rounded-lg">
+                            {animeData.title}
+                        </h1>
+                        <span className='dark:text-white'>{animeData.alternativeTitles}</span>
+                    </div>
+                </div>
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <h2 className="text-lg lg:text-xl mb-2">
                         <span className="inline-block bgColorSecond font-bold dark:text-gray-800 rounded-lg px-3 py-1">Detail</span>
@@ -150,21 +164,23 @@ const Detail = () => {
                             </h2>
                             {batch?.downloadLinks?.map((downloadItem, index) => (
                                 downloadItem.links?.length > 0 && (
-                                    <div key={index} className='mb-10'>
+                                    <div key={index} className='mb-10 '>
                                         <h3 className='mb-4 font-black dark:text-white'>{downloadItem.quality}</h3>
                                         <hr className='w-4/5 h-1 bg-yellow-500 mb-6' />
-                                        {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
-                                            <Link
-                                                key={linkIndex}
-                                                to={download.url}
-                                                target='_blank'
-                                                className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
-                                            >
-                                                <button>
-                                                    {download.title}
-                                                </button>
-                                            </Link>
-                                        ))}
+                                        <div className="flex flex-wrap gap-2">
+                                            {downloadItem.links.slice(0, 6).map((download, linkIndex) => (
+                                                <Link
+                                                    key={linkIndex}
+                                                    to={download.url}
+                                                    target='_blank'
+                                                    className="bg-yellow-100 text-lg px-4 py-2 mr-3 shadow-md font-bold rounded-lg hover:text-white hover:bg-yellow-500 transition-colors"
+                                                >
+                                                    <button>
+                                                        {download.title}
+                                                    </button>
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
                                 )
                             ))}
@@ -173,7 +189,7 @@ const Detail = () => {
 
                 </div>
 
-                <div className="lg:w-1/3 rounded-xl lg:ml-4 mt-4 pl-8 lg:mt-0">
+                <div className="hidden sm:block lg:w-1/3 rounded-xl lg:ml-4 mt-4 pl-8 lg:mt-0">
                     <img
                         className="object-cover object-center w-full h-auto rounded-xl"
                         id="animeimg"

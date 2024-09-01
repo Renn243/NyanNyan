@@ -52,16 +52,16 @@ const SearchAnime = () => {
 
     return (
         <div className='bgColorPrimary3 dark:bg-black min-h-screen'>
-            <div className='flex flex-col mx-auto pb-20 pt-10 lg:px-40 px-10 gap-10'>
+            <div className='flex flex-col mx-auto pb-20 pt-10 sm:px-40 gap-10'>
                 <div className='bgColorPrimary3 dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full mb-8'>
                     <div className='flex flex-row items-center mb-2'>
-                        <span className='font-black dark:text-white text-2xl capitalize'>Search Results for "{query}"</span>
+                        <span className='font-black dark:text-white sm:text-2xl capitalize'>Search Results for "{query}"</span>
                     </div>
                     <hr className='w-full h-1 bg-black dark:bg-white rounded-lg mb-8' />
 
                     {searchResults.length > 0 ? (
                         <>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+                            <div className='grid grid-cols-1 sm:grid-cols-6 gap-4'>
                                 {searchResults.map((res) => (
                                     <Link to={`/anime/${res.animeCode}/${res.animeId}`} key={res.animeId}>
                                         <div className='w-full relative overflow-hidden rounded-lg hover:transform duration-300 hover:-translate-y-2'>
