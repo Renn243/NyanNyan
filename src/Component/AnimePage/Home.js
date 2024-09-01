@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Slider from './Slider';
-import catimg2 from './Image/cat2.png';
 import Nyan from './Image/nyan2.png';
 import Loading from './Loading';
-import hellow from './Image/hellow.png';
 import { useMediaQuery } from 'react-responsive';
 
 
